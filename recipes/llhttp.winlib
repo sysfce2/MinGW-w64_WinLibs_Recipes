@@ -15,6 +15,9 @@ export TYPE=library
 #export VERSIONDATE=20250504
 export VERSION=9.3.1
 export VERSIONDATE=20260215
+#export VERSION=9.4.0
+#export VERSIONDATE=20260429
+####CMake Error: File R:/winlibs15.2.0msvcrt64/llhttp-release-v9.4.0/cmake/llhttpConfig.cmake.in does not exist.
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=
@@ -25,12 +28,14 @@ export LICENSETYPE=MIT
 export DOWNLOADURL="https://github.com/nodejs/llhttp/releases"
 export INSTALLPREFIX=`pwd`/inst_$BASENAME-$VERSION
 export DOWNLOADSOURCEURL=https://github.com/nodejs/llhttp/archive/refs/tags/release/v$VERSION.tar.gz
+#export DOWNLOADSOURCEURL=https://github.com/nodejs/llhttp/archive/refs/tags/v$VERSION.tar.gz
 wl-showstatus download
 wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
 wl-wait4deps
 wl-showstatus extract
 tar xz --force-local -f $TARBALLDIR/$BASENAME/v$VERSION.tar.gz
 cd llhttp-release-v$VERSION
+#cd $BASENAME-$VERSION
 ## fix duplicate target llhttp::llhttp in CMakeLists.txt (version = 9.3.0)
 #patch -ulbf CMakeLists.txt << EOF
 #@@ -94,5 +94,3 @@
@@ -41,6 +46,8 @@ cd llhttp-release-v$VERSION
 #+  if(NOT BUILD_SHARED_LIBS)
 #     add_library(llhttp::llhttp ALIAS llhttp_static)
 #EOF
+## fix version in CMakeLists.txt (version >= 9.4.0)
+#sed -i.bak -e "s/_RELEASE_/$VERSION/" CMakeLists.txt
 mkdir -p build_win &&
  wl-showstatus configure &&
  #cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=ON -DBUILD_STATIC_LIBS:BOOL=ON -S. -Bbuild_win &&
@@ -51,6 +58,7 @@ mkdir -p build_win &&
  mkdir -p $INSTALLPREFIX/bin &&
  cp -u build_win/*.dll $INSTALLPREFIX/bin/ &&
  wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf llhttp-release-v$VERSION
+ #wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
 
 
 

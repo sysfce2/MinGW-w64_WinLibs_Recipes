@@ -5,8 +5,10 @@ export BASENAME=msedit
 export DESCRIPTION="A simple editor for simple needs. This editor pays homage to the classic MS-DOS Editor, but with a modern interface and input controls similar to VS Code. The goal is to provide an accessible editor that even users largely unfamiliar with terminals can easily use."
 export CATEGORY=
 export TYPE=application
-export VERSION=1.2.1
-export VERSIONDATE=20260306
+#export VERSION=1.2.1
+#export VERSIONDATE=20260306
+export VERSION=2.0.0
+export VERSIONDATE=20260429
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=
@@ -23,7 +25,7 @@ wl-wait4deps
 wl-showstatus extract
 tar xz --force-local -f $TARBALLDIR/$BASENAME/v$VERSION.tar.gz
 cd edit-$VERSION
-## fix src/lib.rs (version >= 1.2.1)
+## fix src/lib.rs (version = 1.2.1)
 #patch -ulbf src/lib.rs << EOF
 #@@ -3,12 +3,2 @@
 #
@@ -42,12 +44,13 @@ cd edit-$VERSION
 wl-showstatus build &&
  GIT_CONFIG_GLOBAL=config GIT_SSL_NO_VERIFY=true CARGO_NET_GIT_FETCH_WITH_CLI=true \
  CARGO_HOME=${CARGO_HOME:-$PWD/rustdeps} PATH=$MINGWPREFIX/share/rust/bin:$PATH \
- cargo build &&
+ cargo build --profile release &&
  wl-showstatus install &&
- CARGO_HOME=${CARGO_HOME:-$PWD/rustdeps} PATH=$MINGWPREFIX/share/rust/bin:$PATH \
- cargo install --root $INSTALLPREFIX --path $PWD &&
-    echo OK
-# wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf edit-$VERSION
+ #CARGO_HOME=${CARGO_HOME:-$PWD/rustdeps} PATH=$MINGWPREFIX/share/rust/bin:$PATH \
+ #cargo install --root $INSTALLPREFIX --path $PWD &&
+ mkdir -p $INSTALLPREFIX/bin &&
+ cp -f target/release/edit.exe $INSTALLPREFIX/bin/msedit.exe &&
+ wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf edit-$VERSION
 
 
 
