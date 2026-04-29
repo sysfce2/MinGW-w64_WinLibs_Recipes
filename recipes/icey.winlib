@@ -93,6 +93,8 @@ export VERSIONDATE=20260407
 #export VERSIONDATE=20260409
 #export VERSION=2.4.9
 #export VERSIONDATE=20260428
+#export VERSION=2.4.10
+#export VERSIONDATE=20260429
 ####ld.exe: cckfZZge.ltrans0.ltrans.o:<artificial>:(.text+0x382f): undefined reference to `icy::av::PlanarVideoPacket::~PlanarVideoPacket()'
 wl-showstatus --package-version
 export DEPENDENCIES=libuv

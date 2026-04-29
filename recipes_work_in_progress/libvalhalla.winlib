@@ -127,8 +127,10 @@ export TYPE=library
 #export VERSIONDATE=20260220
 ####Checking for module 'libprime_server>=0.6.3'
 ####A required package was not found
-export VERSION=3.6.2
-export VERSIONDATE=20260115
+#export VERSION=3.6.2
+#export VERSIONDATE=20260115
+export VERSION=3.7.0
+export VERSIONDATE=20260429
 wl-showstatus --package-version
 export DEPENDENCIES=boost,sqlite3,libspatialite,libxml2,libcurl,ffmpeg2,libexif,libnfo,pthreads,prime_server,robin-hood-hashing,cpp-statsd-client
 export OPTIONALDEPENDENCIES=

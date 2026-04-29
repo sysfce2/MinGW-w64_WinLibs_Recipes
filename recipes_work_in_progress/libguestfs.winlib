@@ -526,6 +526,8 @@ export VERSIONDATE=20180922
 #export VERSIONDATE=20260402
 #export VERSION=1.59.6
 #export VERSIONDATE=20260417
+#export VERSION=1.59.7
+#export VERSIONDATE=20260429
 ####configure: error: genisoimage must be installed
 wl-showstatus --package-version
 export DEPENDENCIES=cpio,cdrkit

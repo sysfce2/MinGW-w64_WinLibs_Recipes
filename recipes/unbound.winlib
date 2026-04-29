@@ -175,8 +175,10 @@ export TYPE=library
 #export VERSIONDATE=20250918
 #export VERSION=1.24.1
 #export VERSIONDATE=20251022
-export VERSION=1.24.2
-export VERSIONDATE=20251126
+#export VERSION=1.24.2
+#export VERSIONDATE=20251126
+export VERSION=1.25.0
+export VERSIONDATE=20260429
 wl-showstatus --package-version
 export DEPENDENCIES=openssl,expat,libldns,wsaerror
 export OPTIONALDEPENDENCIES=
@@ -263,24 +265,24 @@ fi
 #EOF
 # fix util/netevent.c (version >= 1.17.0)
 sed -i.bak -e "s/\(#if defined(HAVE_POLL) || \)\(defined(USE_WINSOCK)\)/\1(\2 \&\& defined(_WIN32_WINNT) \&\& _WIN32_WINNT >= 0x0600)/" util/netevent.c
-# fix smallapp/unbound-anchor.c (version >= 1.24.2)
-patch -ulbf smallapp/unbound-anchor.c << EOF
-@@ -1678,6 +1678,10 @@
-        if((s=X509_get_ext_d2i(cert, NID_key_usage, NULL, NULL))) {
--               if(s->length > 0) {
--                       val = s->data[0];
--                       if(s->length > 1)
--                               val |= s->data[1] << 8;
-+               size_t len;
-+                int unused_bits;
-+                unsigned char* data;
-+                if(ASN1_BIT_STRING_get_length(s, &len, &unused_bits) && len > 0) {
-+                       data = ASN1_STRING_get0_data(s);
-+                       val = data[0];
-+                       if(len > 1)
-+                               val |= data[1] << 8;
-                }
-EOF
+## fix smallapp/unbound-anchor.c (version = 1.24.2)
+#patch -ulbf smallapp/unbound-anchor.c << EOF
+#@@ -1678,6 +1678,10 @@
+#        if((s=X509_get_ext_d2i(cert, NID_key_usage, NULL, NULL))) {
+#-               if(s->length > 0) {
+#-                       val = s->data[0];
+#-                       if(s->length > 1)
+#-                               val |= s->data[1] << 8;
+#+               size_t len;
+#+                int unused_bits;
+#+                unsigned char* data;
+#+                if(ASN1_BIT_STRING_get_length(s, &len, &unused_bits) && len > 0) {
+#+                       data = ASN1_STRING_get0_data(s);
+#+                       val = data[0];
+#+                       if(len > 1)
+#+                               val |= data[1] << 8;
+#                }
+#EOF
 ## fix Makefile (version >= 1.5.4)
 #mv Makefile.in Makefile.in.bak
 #sed -e "s/^\(LIBOBJ_WITHOUT_CTIME=.*\)$/\1 locks.o log.o/" Makefile.in.bak > Makefile.in
