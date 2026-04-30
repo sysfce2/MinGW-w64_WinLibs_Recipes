@@ -342,8 +342,10 @@ export TYPE=application
 #export VERSIONDATE=20260324
 #export VERSION=5.0.5
 #export VERSIONDATE=20260404
-export VERSION=5.0.6
-export VERSIONDATE=20260415
+#export VERSION=5.0.6
+#export VERSIONDATE=20260415
+export VERSION=5.0.7
+export VERSIONDATE=20260430
 wl-showstatus --package-version
 export DEPENDENCIES=llvm-project,binaryen,nodejs
 export OPTIONALDEPENDENCIES=

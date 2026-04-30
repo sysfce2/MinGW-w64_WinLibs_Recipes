@@ -44,9 +44,10 @@ export TYPE=library
 #export VERSIONDATE=20231019
 #export VERSION=3.1.0
 #export VERSIONDATE=20240223
+####OSPRay requires Embree to be compiled with support for ISPC (EMBREE_ISPC_SUPPORT=ON).
 export VERSION=3.2.0
 export VERSIONDATE=20240724
-####OSPRay requires Embree to be compiled with support for ISPC (EMBREE_ISPC_SUPPORT=ON).
+####Could not find ISPC.
 wl-showstatus --package-version
 export DEPENDENCIES=embree
 export OPTIONALDEPENDENCIES=

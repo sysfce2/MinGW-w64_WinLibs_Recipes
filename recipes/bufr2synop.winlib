@@ -50,8 +50,10 @@ export TYPE=application
 #export VERSIONDATE=20250818
 #export VERSION=0.35.0
 #export VERSIONDATE=20260215
-export VERSION=0.36.0
-export VERSIONDATE=20260321
+#export VERSION=0.36.0
+#export VERSIONDATE=20260321
+export VERSION=0.37.1
+export VERSIONDATE=20260430
 wl-showstatus --package-version
 export DEPENDENCIES=date-time
 export OPTIONALDEPENDENCIES=
@@ -127,6 +129,15 @@ static inline time_t timegm(struct tm *tm)
 EOF
 cat $F.bak >> $F
 done
+# fix src/bufrdeco/Makefile.am (version >= 0.37.1)
+####src/apps/bufrtotac.c:(.text+0x598): undefined reference to `bufrdeco_write_subset_offset_bits'
+patch -ulbf src/bufrdeco/Makefile.am << EOF
+@@ -24,3 +24,3 @@
+        bufrdeco_print.c bufrdeco_memory.c bufrdeco_csv.c bufrdeco_tableD.c bufrdeco_wmo.c bufrdeco_print_html.c \\
+-       bufrdeco_json.c
++       bufrdeco_json.c bufrdeco_offsets.c
+
+EOF
 wl-showstatus preconfigure &&
  mkdir -p m4 &&
  autoreconf -f -i -I m4 -I $MINGWPREFIX/share/aclocal &&

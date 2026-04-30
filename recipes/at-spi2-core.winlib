@@ -659,8 +659,10 @@ export TYPE=library
 #export VERSIONDATE=20260315
 #export VERSION=2.60.1
 #export VERSIONDATE=20260419
-export VERSION=2.60.2
-export VERSIONDATE=20260426
+#export VERSION=2.60.2
+#export VERSIONDATE=20260426
+export VERSION=2.60.3
+export VERSIONDATE=20260430
 wl-showstatus --package-version
 #export DEPENDENCIES=dbus,libdl,glib2,dbus-glib,libsm,sys_wait_h,atk,libx11,libxtst,libxevie,xkbcommon
 export DEPENDENCIES=dbus,libdl,glib2,dbus-glib,libsm,sys_wait_h,atk

@@ -1,0 +1,106 @@
+export NAME="sccache - Shared Compilation Cache"
+export STATUS=
+export URL=https://github.com/mozilla/sccache
+export BASENAME=sccache
+export DESCRIPTION="sccache is a ccache-like compiler caching tool. It is used as a compiler wrapper and avoids compilation when possible, storing cached results either on local disk or in one of several cloud storage backends. sccache includes support for caching the compilation of C/C++ code, Rust, as well as NVIDIA's CUDA using nvcc."
+export CATEGORY=development
+export TYPE=application
+#export VERSION=0.2.13
+#export VERSIONDATE=20201003
+#export VERSION=0.2.14
+#export VERSIONDATE=20201222
+#export VERSION=0.2.15
+#export VERSIONDATE=20210113
+#export VERSION=0.3.0
+#export VERSIONDATE=20220505
+#export VERSION=0.3.1
+#export VERSIONDATE=20221113
+#export VERSION=0.3.2
+#export VERSIONDATE=20221207
+#export VERSION=0.3.3
+#export VERSIONDATE=20221209
+#export VERSION=0.4.0
+#export VERSIONDATE=20230321
+#export VERSION=0.4.1
+#export VERSIONDATE=20230327
+#export VERSION=0.4.2
+#export VERSIONDATE=20230424
+#export VERSION=0.5.0
+#export VERSIONDATE=20230523
+#export VERSION=0.5.1
+#export VERSIONDATE=20230601
+#export VERSION=0.5.2
+#export VERSIONDATE=20230603
+#export VERSION=0.5.3
+#export VERSIONDATE=20230604
+#export VERSION=0.5.4
+#export VERSIONDATE=20230627
+#export VERSION=0.6.0
+#export VERSIONDATE=20231028
+#export VERSION=0.7.0
+#export VERSIONDATE=20231105
+#export VERSION=0.7.1
+#export VERSIONDATE=20231107
+#export VERSION=0.7.2
+#export VERSIONDATE=20231115
+#export VERSION=0.7.3
+#export VERSIONDATE=20231120
+#export VERSION=0.7.4
+#export VERSIONDATE=20231127
+#export VERSION=0.7.5
+#export VERSIONDATE=20240111
+#export VERSION=0.7.6
+#export VERSIONDATE=20240122
+#export VERSION=0.7.7
+#export VERSIONDATE=20240207
+#export VERSION=0.8.0
+#export VERSIONDATE=20240421
+#export VERSION=0.8.1
+#export VERSIONDATE=20240525
+#export VERSION=0.8.2
+#export VERSIONDATE=20240928
+#export VERSION=0.9.0
+#export VERSIONDATE=20241210
+#export VERSION=0.9.1
+#export VERSIONDATE=20250107
+#export VERSION=0.10.0
+#export VERSIONDATE=20250225
+#export VERSION=0.11.0
+#export VERSIONDATE=20251011
+#export VERSION=0.12.0
+#export VERSIONDATE=20251021
+#export VERSION=0.13.0
+#export VERSIONDATE=20260114
+#export VERSION=0.14.0
+#export VERSIONDATE=20260210
+export VERSION=0.15.0
+export VERSIONDATE=20260430
+wl-showstatus --package-version
+export DEPENDENCIES=
+export OPTIONALDEPENDENCIES=
+export BUILDDEPENDENCIES=rust
+export OPTIONALBUILDDEPENDENCIES=
+export LICENSEFILE=LICENSE
+export LICENSETYPE=Apache
+export DOWNLOADURL="https://github.com/mozilla/sccache/releases/"
+export INSTALLPREFIX=`pwd`/inst_$BASENAME-$VERSION
+#export DOWNLOADSOURCEURL=https://github.com/mozilla/sccache/archive/$VERSION.tar.gz
+#export DOWNLOADSOURCEURL=https://github.com/mozilla/sccache/archive/v$VERSION.tar.gz
+#export DOWNLOADSOURCEURL=https://github.com/mozilla/sccache/archive/refs/tags/$VERSION.tar.gz
+export DOWNLOADSOURCEURL=https://github.com/mozilla/sccache/archive/refs/tags/v$VERSION.tar.gz
+wl-showstatus download
+wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
+wl-wait4deps
+wl-showstatus extract
+#tar xz --force-local -f $TARBALLDIR/$BASENAME/$VERSION.tar.gz
+tar xz --force-local -f $TARBALLDIR/$BASENAME/v$VERSION.tar.gz
+cd $BASENAME-$VERSION
+wl-showstatus install &&
+ #GIT_CONFIG_GLOBAL=config GIT_SSL_NO_VERIFY=true CARGO_NET_GIT_FETCH_WITH_CLI=true \
+ CARGO_HOME=${CARGO_HOME:-$PWD/rustdeps} PATH=$MINGWPREFIX/share/rust/bin:$PATH \
+ cargo install --root $INSTALLPREFIX --profile release --path . &&
+ wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
+####$MINGWPREFIX/bin/sccache.exe --help
+
+
+

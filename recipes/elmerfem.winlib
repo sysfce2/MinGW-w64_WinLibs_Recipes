@@ -9,8 +9,10 @@ export TYPE=library
 #export VERSIONDATE=20220411
 #export VERSION=26.1
 #export VERSIONDATE=20260123
-export VERSION=26.2
-export VERSIONDATE=20260429
+#export VERSION=26.2
+#export VERSIONDATE=20260429
+export VERSION=26.2.1
+export VERSIONDATE=20260430
 wl-showstatus --package-version
 export DEPENDENCIES=qt,vtk,openblas,suitesparse,hypre
 export OPTIONALDEPENDENCIES=zoltan
