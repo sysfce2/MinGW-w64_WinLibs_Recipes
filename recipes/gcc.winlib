@@ -435,8 +435,8 @@ export TYPE=application
 #export VERSIONDATE=20250421
 #export VERSION=15.1.0
 #export VERSIONDATE=20250425
-export VERSION=15.2.0
-export VERSIONDATE=20250809
+#export VERSION=15.2.0
+#export VERSIONDATE=20250809
 #export VERSION=16-20250928
 #export VERSIONDATE=20251004
 #export VERSION=16-20251026
@@ -453,6 +453,8 @@ export VERSIONDATE=20250809
 #export VERSIONDATE=20260309
 #export VERSION=16-20260425
 #export VERSIONDATE=20260426
+export VERSION=16.1.0
+export VERSIONDATE=20260430
 wl-showstatus --package-version
 export DEPENDENCIES=zlib,zstd,pthreads,mcfgthread,libiconv,mpfr,gmp,mpc,isl,mingw-w64,libdl,mman-win32
 #export OPTIONALDEPENDENCIES=libbacktrace
@@ -1567,6 +1569,8 @@ mkdir -p build_mingw &&
  # fix error: No rule to make target '-liconv' (version >= 15.1.0)
  ####make[2]: *** No rule to make target '-liconv', needed by 'libgdiagnostics-0.dll'.  Stop.
  touch build_mingw/gcc/-liconv &&
+ # fix error: No rule to make target '-lws2_32' (version >= 16.1.0)
+ touch build_mingw/gcc/-lws2_32 &&
  wl-showstatus build &&
  #( make -Cbuild_mingw || make -j1 -Cbuild_mingw ) &&
  #make -Cbuild_mingw/gcc CPP=$(which cpp.exe) &&
@@ -1586,7 +1590,6 @@ mkdir -p build_mingw &&
  wl-showstatus build-install &&
  #make -Cbuild_mingw install-strip &&
  ( make -Cbuild_mingw install-strip || make -Cbuild_mingw install-strip LIBS="-lmman" ) &&
- # to fix building with GCC16: touch build_mingw/gcc/-lws2_32 
  # to fix building Rust with GCC16: make -Cbuild_mingw/gcc ZSTD_LIB="-lzstd -lntdll -luserenv -lws2_32" 
  ## strip absolute -L paths from libstdc++.la and libsupc++.la
  #sed -i -e "s? -L$(pwd)[^\s]*??g; s? -L$INSTALLPREFIX/share/gcc/? -L../?g" $INSTALLPREFIX/share/gcc/lib/*.la &&
