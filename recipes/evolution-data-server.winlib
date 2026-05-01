@@ -882,22 +882,7 @@ wl-showstatus configure &&
  #PATH=$PYDIR:$PATH:$PERLDIR/../c/bin INTLTOOL_PERL="$PERLDIR/bin/perl.exe" ./configure --prefix=$INSTALLPREFIX --build=$BUILDPLATFORM --host=$RUNPLATFORM --disable-weather --without-weather --disable-goa --disable-ssl --with-openldap --with-nspr-includes=$MINGWPREFIX/include/nspr --disable-gtk --disable-google-auth --with-nss-includes=$MINGWPREFIX/include/nss --enable-introspection=no --disable-ipv6 --disable-uoa --disable-examples CFLAGS="-I$MINGWPREFIX/include/nspr" LDFLAGS="-Wl,-no-undefined -Wl,--enable-auto-import" &&
  wl-showstatus build-install &&
  # fix deprecated symbols in glib2
- mv libedataserver/Makefile libedataserver/Makefile.bak &&
- sed -e "s/-DG_DISABLE_DEPRECATED//" libedataserver/Makefile.bak > libedataserver/Makefile &&
- mv servers/groupwise/Makefile servers/groupwise/Makefile.bak &&
- sed -e "s/-DG_DISABLE_DEPRECATED//" servers/groupwise/Makefile.bak > servers/groupwise/Makefile &&
- mv camel/Makefile camel/Makefile.bak &&
- sed -e "s/-DG_DISABLE_DEPRECATED//" camel/Makefile.bak > camel/Makefile &&
- mv camel/providers/imap/Makefile camel/providers/imap/Makefile.bak &&
- sed -e "s/-DG_DISABLE_DEPRECATED//" camel/providers/imap/Makefile.bak > camel/providers/imap/Makefile &&
- mv camel/providers/imapx/Makefile camel/providers/imapx/Makefile.bak &&
- sed -e "s/-DG_DISABLE_DEPRECATED//" camel/providers/imapx/Makefile.bak > camel/providers/imapx/Makefile &&
- mv camel/providers/nntp/Makefile camel/providers/nntp/Makefile.bak &&
- sed -e "s/-DG_DISABLE_DEPRECATED//" camel/providers/nntp/Makefile.bak > camel/providers/nntp/Makefile &&
- mv camel/providers/local/Makefile camel/providers/local/Makefile.bak &&
- sed -e "s/-DG_DISABLE_DEPRECATED//" camel/providers/local/Makefile.bak > camel/providers/local/Makefile &&
- mv camel/providers/groupwise/Makefile camel/providers/groupwise/Makefile.bak &&
- sed -e "s/-DG_DISABLE_DEPRECATED//" camel/providers/groupwise/Makefile.bak > camel/providers/groupwise/Makefile &&
+ sed -e "s/-DG_DISABLE_DEPRECATED//" libedataserver/Makefile servers/groupwise/Makefile camel/Makefile camel/providers/imap/Makefile camel/providers/imapx/Makefile camel/providers/nntp/Makefile camel/providers/local/Makefile camel/providers/groupwise/Makefile &&
  ( make install-strip || ( make -C camel LIBS="-Wl,--as-needed -lnspr4" && make install-strip ) || ( make -C libedataserver install-strip && make -C servers install-strip && make -C camel install-strip ) ) &&
  wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
 ####make -C camel LIBS="-Wl,--as-needed -lnspr4"

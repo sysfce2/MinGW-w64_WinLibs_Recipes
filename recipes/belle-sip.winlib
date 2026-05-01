@@ -401,8 +401,10 @@ export TYPE=library
 #export VERSIONDATE=20260407
 #export VERSION=5.4.106
 #export VERSIONDATE=20260408
-export VERSION=5.4.107
-export VERSIONDATE=20260417
+#export VERSION=5.4.107
+#export VERSIONDATE=20260417
+export VERSION=5.4.110
+export VERSIONDATE=20260501
 wl-showstatus --package-version
 export DEPENDENCIES=belr,bctoolbox
 export OPTIONALDEPENDENCIES=

@@ -5,10 +5,16 @@ export BASENAME=streamvbyte
 export DESCRIPTION="StreamVByte is a new integer compression technique that applies SIMD instructions (vectorization) to Google's Group Varint approach. The net result is faster than other byte-oriented compression techniques."
 export CATEGORY=compression
 export TYPE=library
-export VERSION=2.0.0
-export VERSIONDATE=20250124
+#export VERSION=2.0.0
+#export VERSIONDATE=20250124
+#export DEPENDENCIES=
+#export OPTIONALDEPENDENCIES=
+#export BUILDDEPENDENCIES=cmake,ninja
+#export OPTIONALBUILDDEPENDENCIES=
+export VERSION=3.0.0
+export VERSIONDATE=20260401
 wl-showstatus --package-version
-export DEPENDENCIES=
+export DEPENDENCIES=cpm-cmake
 export OPTIONALDEPENDENCIES=
 export BUILDDEPENDENCIES=cmake,ninja
 export OPTIONALBUILDDEPENDENCIES=
@@ -65,6 +71,8 @@ INSTALL(
   DESTINATION "cmake"
 )
 EOF
+# use already installed CPM.cmake (version >= 3.0.0)
+mv cmake/CPM.cmake cmake/CPM.cmake.bak && touch cmake/CPM.cmake
 mkdir -p build_static build_shared &&
  wl-showstatus configure-static &&
  cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=OFF -DSTREAMVBYTE_ENABLE_EXAMPLES:BOOL=OFF -DSTREAMVBYTE_ENABLE_TESTS:BOOL=OFF -DCMAKE_POLICY_VERSION_MINIMUM:STRING=3.5 -S. -Bbuild_static &&
