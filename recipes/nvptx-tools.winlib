@@ -30,43 +30,43 @@ wl-wait4deps
 wl-showstatus extract
 tar xz --force-local -f $TARBALLDIR/$BASENAME/$VERSION.tar.gz
 cd $BASENAME-$VERSION
-# fix missing strndup/WIFSIGNALED/WTERMSIG/WCOREDUMP/WIFEXITED/WEXITSTATUS in nvptx-as.c
-patch -ulbf nvptx-as.c << EOF
-@@ -42,2 +42,14 @@
- #include <hashtab.h>
-+#ifdef _WIN32
-+#include <stdlib.h>
-+#include <string.h>
-+char* strndup (const char *str, size_t maxlen)
-+{
-+  int l = strnlen(str, maxlen);
-+  char* s = (char*)malloc(l + 1);
-+  memcpy(s, str, l);
-+  s[l] = 0;
-+  return s;
-+}
-+#endif
-
-@@ -907,2 +919,5 @@
-   if (status)
-+#ifdef _WIN32
-+    return status;
-+#else
-     {
-@@ -919,2 +934,3 @@
-     }
-+#endif
-   return 0;
-EOF
-# fix already define sys_errlist in libiberty/strerror.c (version >= master)
-patch -ulbf libiberty/strerror.c << EOF
-@@ -472,3 +472,5 @@
- extern int sys_nerr;
-+#ifndef __MINGW32__
- extern char *sys_errlist[];
-+#endif
-
-EOF
+## fix missing strndup/WIFSIGNALED/WTERMSIG/WCOREDUMP/WIFEXITED/WEXITSTATUS in nvptx-as.c
+#patch -ulbf nvptx-as.c << EOF
+#@@ -42,2 +42,14 @@
+# #include <hashtab.h>
+#+#ifdef _WIN32
+#+#include <stdlib.h>
+#+#include <string.h>
+#+char* strndup (const char *str, size_t maxlen)
+#+{
+#+  int l = strnlen(str, maxlen);
+#+  char* s = (char*)malloc(l + 1);
+#+  memcpy(s, str, l);
+#+  s[l] = 0;
+#+  return s;
+#+}
+#+#endif
+#
+#@@ -907,2 +919,5 @@
+#   if (status)
+#+#ifdef _WIN32
+#+    return status;
+#+#else
+#     {
+#@@ -919,2 +934,3 @@
+#     }
+#+#endif
+#   return 0;
+#EOF
+## fix already define sys_errlist in libiberty/strerror.c (version >= master)
+#patch -ulbf libiberty/strerror.c << EOF
+#@@ -472,3 +472,5 @@
+# extern int sys_nerr;
+#+#ifndef __MINGW32__
+# extern char *sys_errlist[];
+#+#endif
+#
+#EOF
 # fix missing strndup/strsignal/WCOREDUMP in nvptx-as.cc (version >= master)
 mv nvptx-as.cc nvptx-as.cc.bak
 cat > nvptx-as.cc << EOF
