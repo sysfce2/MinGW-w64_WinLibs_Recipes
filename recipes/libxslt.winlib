@@ -46,7 +46,7 @@ wl-showstatus --package-version
 export DEPENDENCIES=libxml2,pthreads
 export OPTIONALDEPENDENCIES=
 export BUILDDEPENDENCIES=
-export OPTIONALBUILDDEPENDENCIES=
+export OPTIONALBUILDDEPENDENCIES=cmake,ninja
 #export LICENSEFILE=COPYING
 export LICENSEFILE=Copyright
 export LICENSETYPE=
@@ -99,7 +99,8 @@ ${DLLTOOL:-dlltool} -D $PYDIR/python[0-9][0-9]*.dll -d pylibs/python3.def -l pyl
 #fi
 ## allow building shared libraries when using clang
 #sed -i.bak -e "s/\$LD --help 2>&1 | \$GREP 'auto-import'/true/" configure
-wl-showstatus preconfigure &&
+if ! cmake --version &> /dev/null || ! ninja --version &> /dev/null; then
+ wl-showstatus preconfigure &&
  autoreconf -f -i -I m4 -I $MINGWPREFIX/share/aclocal &&
  wl-showstatus configure &&
  #./configure --prefix=$INSTALLPREFIX --build=$BUILDPLATFORM --host=$RUNPLATFORM LDFLAGS="-no-undefined" && make install
@@ -114,21 +115,24 @@ wl-showstatus preconfigure &&
  make install-strip pythondir=$INSTALLPREFIX/python/Lib/site-packages pyexecdir=$INSTALLPREFIX/python/Lib/site-packages $(if ${CC:-gcc} --version|grep -q "^clang"; then echo "LIBXSLT_VERSION_SCRIPT="; fi) &&
  # fix absolute paths in xslt-config
  sed -i -e "s?$INSTALLPREFIX?\$(dirname \$0)/..?g" $INSTALLPREFIX/bin/xslt-config &&
+ touch SUCCESS
+else
+ mkdir -p build_static build_shared &&
+ wl-showstatus configure-static &&
+ cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=OFF -DLIBXSLT_WITH_THREADS:BOOL=ON -DLIBXSLT_WITH_CRYPTO:BOOL=ON -DLIBXSLT_WITH_MODULES:BOOL=ON -DLIBXSLT_WITH_PYTHON:BOOL=OFF -DLIBXSLT_WITH_PROGRAMS:BOOL=OFF -DLIBXSLT_WITH_TESTS:BOOL=OFF -S. -Bbuild_static &&
+ wl-showstatus configure-shared &&
+ cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=ON -DLIBXSLT_WITH_THREADS:BOOL=ON -DLIBXSLT_WITH_CRYPTO:BOOL=ON -DLIBXSLT_WITH_MODULES:BOOL=ON -DLIBXSLT_WITH_PYTHON:BOOL=ON -DPython_EXECUTABLE:FILEPATH=$PYDIR/python.exe -DLIBXSLT_PYTHON_INSTALL_DIR:PATH=$INSTALLPREFIX/python/Lib/site-packages -DLIBXSLT_WITH_PROGRAMS:BOOL=ON -DLIBXSLT_WITH_TESTS:BOOL=OFF -DCMAKE_DLL_NAME_WITH_SOVERSION:BOOL=ON -S. -Bbuild_shared &&
+ wl-showstatus build-install-static &&
+ ninja -Cbuild_static install/strip &&
+ wl-showstatus build-install-shared &&
+ ninja -Cbuild_shared install/strip &&
+ # fix absolute paths in xsltConf.sh (note: doesn't work when file is sourced)
+ sed -i -e "s?$(cygpath -m $INSTALLPREFIX)?\$(dirname \$(dirname \$0))?g" $INSTALLPREFIX/lib/xsltConf.sh &&
+ touch SUCCESS
+fi &&
+ rm SUCCESS &&
  #wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
  wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-v$VERSION
 
 
 
-#export BUILDDEPENDENCIES=cmake,ninja
-#mkdir -p build_static build_shared &&
-# wl-showstatus configure-static &&
-# cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=OFF -DLIBXSLT_WITH_THREADS:BOOL=ON -DLIBXSLT_WITH_CRYPTO:BOOL=ON -DLIBXSLT_WITH_MODULES:BOOL=ON -DLIBXSLT_WITH_PYTHON:BOOL=OFF -DLIBXSLT_WITH_PROGRAMS:BOOL=OFF -DLIBXSLT_WITH_TESTS:BOOL=OFF -S. -Bbuild_static &&
-# wl-showstatus configure-shared &&
-# cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=ON -DLIBXSLT_WITH_THREADS:BOOL=ON -DLIBXSLT_WITH_CRYPTO:BOOL=ON -DLIBXSLT_WITH_MODULES:BOOL=ON -DLIBXSLT_WITH_PYTHON:BOOL=ON -DPython_EXECUTABLE:FILEPATH=$PYDIR/python.exe -DLIBXSLT_WITH_PROGRAMS:BOOL=ON -DLIBXSLT_WITH_TESTS:BOOL=OFF -S. -Bbuild_shared &&
-# wl-showstatus build-install-static &&
-# ninja -Cbuild_static install/strip &&
-# wl-showstatus build-install-shared &&
-# ninja -Cbuild_shared install/strip &&
-# # fix absolute paths in xsltConf.sh (note: doesn't work when file is sourced)
-# sed -i -e "s?$(cygpath -m $INSTALLPREFIX)?\$(dirname \$(dirname \$0))?g" $INSTALLPREFIX/lib/xsltConf.sh &&
-# wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-v$VERSION

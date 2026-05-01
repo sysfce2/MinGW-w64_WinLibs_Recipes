@@ -58,8 +58,10 @@ export TYPE=library
 #export VERSIONDATE=20260316
 #export VERSION=0.16.9
 #export VERSIONDATE=20260407
-export VERSION=0.16.10
-export VERSIONDATE=20260423
+#export VERSION=0.16.10
+#export VERSIONDATE=20260423
+export VERSION=0.16.11
+export VERSIONDATE=20260501
 ####rak/socket_address.h:65:16: error: 'sa_family_t' does not name a type
 wl-showstatus --package-version
 export DEPENDENCIES=mman-win32

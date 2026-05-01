@@ -5,8 +5,10 @@ export BASENAME=cargo-c
 export DESCRIPTION="cargo applet to build and install C-ABI compatible dynamic and static libraries. It produces and installs a correct pkg-config file, a static library and a dynamic library, and a C header to be used by any C (and C-compatible) software."
 export CATEGORY=development
 export TYPE=application
-export VERSION=0.10.21
-export VERSIONDATE=20260415
+#export VERSION=0.10.21
+#export VERSIONDATE=20260415
+export VERSION=0.10.22
+export VERSIONDATE=20260501
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=
