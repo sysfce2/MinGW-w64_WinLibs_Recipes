@@ -102,16 +102,19 @@ export LICENSETYPE=
 #export DOWNLOADURL="http://www.oracle.com/technology/software/products/berkeley-db/db/index.html db/ /db-targz.html"
 #export DOWNLOADURL="http://www.oracle.com/technetwork/database/database-technologies/berkeleydb/downloads/index.html db/ /db-targz.html"
 #export DOWNLOADURL="http://www.oracle.com/technetwork/database/database-technologies/berkeleydb/downloads/index.html db-"
-export DOWNLOADURL="https://www.oracle.com/database/technologies/related/berkeleydb-release-history.html db-"
+#export DOWNLOADURL="https://www.oracle.com/database/technologies/related/berkeleydb-release-history.html db-"
+export DOWNLOADURL="https://github.com/michaelcahill/berkeleydb-archive/tags"
 export INSTALLPREFIX=`pwd`/inst_$BASENAME-$VERSION
 #export DOWNLOADSOURCEURL=http://download.oracle.com/berkeley-db/db-$VERSION.tar.gz
 #export DOWNLOADSOURCEURL=http://download.oracle.com/otn/berkeley-db/db-$VERSION.tar.gz
-export DOWNLOADSOURCEURL=https://download.oracle.com/otn/berkeley-db/db-$VERSION.tar.gz
+#export DOWNLOADSOURCEURL=https://download.oracle.com/otn/berkeley-db/db-$VERSION.tar.gz
+export DOWNLOADSOURCEURL=https://github.com/michaelcahill/berkeleydb-archive/archive/refs/tags/db-$VERSION.tar.gz
 wl-showstatus download
-#wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
+wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
 wl-wait4deps
 tar xz --force-local -f $TARBALLDIR/$BASENAME/db-$VERSION.tar.gz
-cd db-$VERSION
+#cd db-$VERSION
+cd berkeleydb-archive-db-$VERSION
 ## fix for mkdir having only 1 parameter in Windows (version <= 4.8.30)
 #mv os/os_mkdir.c os/os_mkdir.c.bak
 #sed -e 's/, *__db_omode("rwx------")//; s/RETRY_CHK//' os/os_mkdir.c.bak > os/os_mkdir.c
@@ -299,7 +302,8 @@ wl-showstatus configure &&
   cp -f $INSTALLPREFIX/lib/libdb_cxx-*.[0-9].dll.a $INSTALLPREFIX/lib/libdb_cxx.dll.a
  fi &&
  cd .. &&
- wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && rm -rf db-$VERSION
+ #wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && rm -rf db-$VERSION
+ wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && rm -rf berkeleydb-archive-db-$VERSION
 
 
 
