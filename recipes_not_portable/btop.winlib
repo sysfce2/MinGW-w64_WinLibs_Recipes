@@ -2,7 +2,7 @@ export NAME="btop"
 export STATUS=
 export URL=https://github.com/aristocratos/btop
 export BASENAME=btop
-export DESCRIPTION=""
+export DESCRIPTION="A monitor of resources"
 export CATEGORY=
 export TYPE=library
 #export VERSION=1.4.0
@@ -17,8 +17,10 @@ export TYPE=library
 #export VERSIONDATE=20250704
 #export VERSION=1.4.5
 #export VERSIONDATE=20250920
-export VERSION=1.4.6
-export VERSIONDATE=20251227
+#export VERSION=1.4.6
+#export VERSIONDATE=20251227
+export VERSION=1.4.7
+export VERSIONDATE=20260502
 ####Windows is not supported
 wl-showstatus --package-version
 export DEPENDENCIES=

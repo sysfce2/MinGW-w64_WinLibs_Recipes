@@ -54,8 +54,10 @@ export TYPE=library
 #export VERSIONDATE=20250302
 #export VERSION=2.8.8
 #export VERSIONDATE=20250304
-export VERSION=2.8.10
-export VERSIONDATE=20250305
+#export VERSION=2.8.10
+#export VERSIONDATE=20250305
+export VERSION=2.8.12
+export VERSIONDATE=20260502
 wl-showstatus --package-version
 export DEPENDENCIES=sdl2,giflib,libjpeg,libpng,libtiff,libwebp,libavif,libjxl
 export OPTIONALDEPENDENCIES=

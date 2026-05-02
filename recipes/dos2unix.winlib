@@ -1,6 +1,7 @@
 export NAME="dos2unix/unix2dos"
 export STATUS=
-export URL=http://waterlan.home.xs4all.nl/dos2unix.html
+#export URL=http://waterlan.home.xs4all.nl/dos2unix.html
+export URL=https://waterlander.net/dos2unix/
 #export URL=http://dos2unix.sourceforge.net/
 export BASENAME=dos2unix
 export DESCRIPTION="dos2unix - DOS/MAC to UNIX text file format converter; unix2dos - UNIX to DOS/MAC text file format converter"
@@ -41,10 +42,12 @@ export BUILDDEPENDENCIES=
 export OPTIONALBUILDDEPENDENCIES=
 export LICENSEFILE=COPYING.txt
 export LICENSETYPE=FreeBSD
-export DOWNLOADURL="http://waterlan.home.xs4all.nl/dos2unix.html"
+#export DOWNLOADURL="http://waterlan.home.xs4all.nl/dos2unix.html"
+export DOWNLOADURL="https://waterlander.net/dos2unix/"
 #export DOWNLOADURL="https://sourceforge.net/projects/dos2unix/files/"
 export INSTALLPREFIX=`pwd`/inst_$BASENAME-$VERSION
-export DOWNLOADSOURCEURL=http://waterlan.home.xs4all.nl/dos2unix/$BASENAME-$VERSION.tar.gz
+#export DOWNLOADSOURCEURL=http://waterlan.home.xs4all.nl/dos2unix/$BASENAME-$VERSION.tar.gz
+export DOWNLOADSOURCEURL=https://waterlander.net/dos2unix/files/$BASENAME-$VERSION.tar.gz
 #export DOWNLOADSOURCEURL=http://downloads.sourceforge.net/project/dos2unix/dos2unix/$VERSION/$BASENAME-$VERSION.tar.gz
 wl-showstatus download
 wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
