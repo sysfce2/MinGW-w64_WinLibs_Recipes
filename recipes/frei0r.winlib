@@ -115,6 +115,14 @@ patch -ulbf src/filter/tint0r/tint0r.c << EOF
 +    _mm_storeu_si128((__m128i*)(outframe + i * 4), (__m128i)p);
    }
 EOF
+ fix src/filter/kaleid0sc0pe/kaleid0sc0pe.h (version >= 3.1.3)
+patch -ulbf src/filter/kaleid0sc0pe/kaleid0sc0pe.h << EOF
+@@ -41,3 +41,3 @@
+ #ifndef _M_ARM
+-#define __SSE2__
++#define __SSE2__ 1
+ #endif
+EOF
 ## fix src/Makefile
 #mv src/Makefile.in src/Makefile.in.bak
 #sed -e "s?\$(DESTDIR)/\(\$(plugindir)\)?\1?g; s?\.so?.dll?" src/Makefile.in.bak > src/Makefile.in
