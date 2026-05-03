@@ -162,6 +162,8 @@ export TYPE=library
 #export VERSIONDATE=20200326
 #export VERSION=42.0
 #export VERSIONDATE=20220522
+#export VERSION=42.1
+#export VERSIONDATE=20260503
 ####daemon/gkd-main.c:61:10: fatal error: gio/gunixinputstream.h: No such file or directory
 #export VERSION=46.0
 #export VERSIONDATE=20240211
@@ -172,7 +174,8 @@ export VERSIONDATE=20240713
 #export VERSION=48.0
 #export VERSIONDATE=20250319
 wl-showstatus --package-version
-export DEPENDENCIES=gconf,libtasn1,libgcrypt,dbus,glib2,gtk3,pango,gettext,p11-kit,gcr,pthreads,mman-win32
+#export DEPENDENCIES=gconf,libtasn1,libgcrypt,dbus,glib2,gtk3,pango,gettext,p11-kit,gcr,pthreads,mman-win32
+export DEPENDENCIES=gconf,libtasn1,libgcrypt,dbus,glib2,gtk3,pango,gettext,p11-kit,gcr-3,pthreads,mman-win32
 export OPTIONALDEPENDENCIES=
 export BUILDDEPENDENCIES=
 export OPTIONALBUILDDEPENDENCIES=
@@ -746,7 +749,7 @@ wl-showstatus configure &&
 #sed -i.bak -e "s/gio-unix-/gio-windows-/" meson.build
 #mkdir -p build_both &&
 # wl-showstatus configure &&
-# PYTHONPATH=${PYTHONPATH:+:$PYTHONPATH}:$MINGWPREFIX/lib $PYDIR/python.exe $(which meson.py) setup --prefix $INSTALLPREFIX --backend ninja --buildtype release --strip --default-library both -Dpam=false -Dselinux=disabled -Dsystemd=disabled -Dmanpage=false $PWD build_both &&
+# PYTHONPATH=${PYTHONPATH:+:$PYTHONPATH}:$MINGWPREFIX/lib $PYDIR/python.exe $(which meson.py) setup --prefix $INSTALLPREFIX --backend ninja --buildtype release --strip --default-library both -Dpam=false -Dselinux=disabled -Dsystemd=disabled -Dmanpage=false -Dc_args="-I$MINGWPREFIX/include/mman-win32 $(if ${CC:-gcc} --help -v 2>/dev/null|grep -q "\-Wincompatible-pointer-types" || ${CC:-gcc} --version|grep -q "^clang"; then echo "-Wno-incompatible-pointer-types -Wno-incompatible-function-pointer-types"; fi)" -Dc_link_args="-Wl,--as-needed -lmman -lpthread" $PWD build_both &&
 # ## fix slash/backslash path issue when calling Python from Ninja
 # #sed -i.bak -e "s/join_paths/os.path.join/g; /COMMAND =.*python\.exe/ s?\"/\([a-zA-Z]\)/?\"\1:/?; /COMMAND =.*python\.exe/ s?/?\\\\?g" build_*/build.ninja &&
 # ## fix Python path issues in meson_exe
