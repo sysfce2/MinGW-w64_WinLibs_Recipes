@@ -1,0 +1,48 @@
+export NAME="Hjson for C++"
+export STATUS=
+export URL=https://hjson.github.io/
+export BASENAME=hjson-cpp
+export DESCRIPTION="Hjson for C++"
+export CATEGORY=fileformat
+export TYPE=library
+export VERSION=2.6
+export VERSIONDATE=20260503
+wl-showstatus --package-version
+export DEPENDENCIES=
+export OPTIONALDEPENDENCIES=
+export BUILDDEPENDENCIES=cmake,ninja
+export OPTIONALBUILDDEPENDENCIES=
+export LICENSEFILE=LICENSE
+export LICENSETYPE=MIT
+export DOWNLOADURL="https://github.com/hjson/hjson-cpp/releases"
+export INSTALLPREFIX=`pwd`/inst_$BASENAME-$VERSION
+export DOWNLOADSOURCEURL=https://github.com/hjson/hjson-cpp/archive/refs/tags/$VERSION.tar.gz
+wl-showstatus download
+wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
+wl-wait4deps
+wl-showstatus extract
+tar xz --force-local -f $TARBALLDIR/$BASENAME/$VERSION.tar.gz
+cd $BASENAME-$VERSION
+mkdir -p build_static build_shared &&
+ wl-showstatus configure-static &&
+ cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=OFF -DHJSON_ENABLE_TEST:BOOL=OFF -S. -Bbuild_static &&
+ wl-showstatus configure-shared &&
+ cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=ON -DHJSON_ENABLE_TEST:BOOL=OFF -S. -Bbuild_shared &&
+ wl-showstatus build-static &&
+ ninja -Cbuild_static &&
+ wl-showstatus build-shared &&
+ ninja -Cbuild_shared &&
+ #wl-showstatus build-install-static &&
+ #ninja -Cbuild_static install/strip &&
+ #wl-showstatus build-install-shared &&
+ #ninja -Cbuild_shared install/strip &&
+ wl-showstatus install &&
+ strip build_shared/src/*.dll &&
+ mkdir -p $INSTALLPREFIX/include $INSTALLPREFIX/lib $INSTALLPREFIX/bin &&
+ cp -rf include/* $INSTALLPREFIX/include/ &&
+ cp -f build_static/src/*.a build_shared/src/*.a $INSTALLPREFIX/lib/ &&
+ cp -f build_shared/src/*.dll $INSTALLPREFIX/bin/ &&
+ wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
+
+
+

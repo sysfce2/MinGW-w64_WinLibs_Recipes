@@ -124,13 +124,9 @@ wl-showstatus preconfigure &&
 ##sed -i.bak -e "s/^.*PA_ASIOSDK_SOURCES/#&/" CMakeLists.txt
 #mkdir -p build_win &&
 # wl-showstatus configure &&
-# cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DPA_BUILD_STATIC:BOOL=ON -DPA_BUILD_SHARED:BOOL=ON -DPA_UNICODE_BUILD:BOOL=ON -DPA_USE_DS:BOOL=OFF -DPA_USE_WASAPI:BOOL=OFF -DPA_USE_WDMKS:BOOL=ON -DPA_USE_WMME:BOOL=ON -DPA_USE_ASIO:BOOL=ON -DASIOSDK_ROOT_DIR:PATH=$MINGWPREFIX/share/rtaudio/asiosdk -DASIOSDK_INCLUDE_DIR:PATH=$MINGWPREFIX/include -DPA_BUILD_EXAMPLES:BOOL=OFF -DPA_BUILD_TESTS:BOOL=OFF -S. -Bbuild_win &&
+# cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DPA_BUILD_STATIC:BOOL=ON -DPA_BUILD_SHARED:BOOL=ON -DPA_UNICODE_BUILD:BOOL=ON -DPA_USE_DS:BOOL=OFF -DPA_USE_WASAPI:BOOL=OFF -DPA_USE_WDMKS:BOOL=ON -DPA_USE_WMME:BOOL=ON -DPA_USE_ASIO:BOOL=ON -DASIOSDK_ROOT_DIR:PATH=$MINGWPREFIX/share/rtaudio/asiosdk -DASIOSDK_INCLUDE_DIR:PATH=$MINGWPREFIX/include -DPA_BUILD_EXAMPLES:BOOL=OFF -DPA_BUILD_TESTS:BOOL=OFF -DPA_LIBNAME_ADD_SUFFIX:BOOL=OFF -DCMAKE_DLL_NAME_WITH_SOVERSION:BOOL=ON -DCMAKE_POLICY_VERSION_MINIMUM:STRING=3.5 -S. -Bbuild_win &&
 # wl-showstatus build-install &&
 # ninja -Cbuild_win install/strip &&
-# mkdir -p $INSTALLPREFIX/bin &&
-# mv -f $INSTALLPREFIX/lib/*.dll $INSTALLPREFIX/bin/ &&
-# cp -f build_win/libportaudio_static.a $INSTALLPREFIX/lib/libportaudio_static.a &&
-# cp -f build_win/libportaudio_static.a $INSTALLPREFIX/lib/libportaudio.a &&
 # wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd ../.. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
 #####TO DO: libportaudiocpp
 #####TO DO: -DPA_USE_DS:BOOL=ON

@@ -1,0 +1,43 @@
+export NAME="jzon-c"
+export STATUS=
+export URL=https://github.com/karl-zylinski/jzon-c
+export BASENAME=jzon-c
+export DESCRIPTION="jzon is a format for describing data that is easier and less error-prone to edit than standard JSON. It is based on Hjson (http://laktak.github.io/hjson) and SJSON (http://bitsquid.blogspot.se/2009/10/simplified-json-notation.html), which are both in turn based on JSON. It is written in C11. It is only a parser."
+export CATEGORY=fileformat
+export TYPE=library
+export VERSION=1.0rc
+export VERSIONDATE=20260503
+wl-showstatus --package-version
+export DEPENDENCIES=
+export OPTIONALDEPENDENCIES=
+export BUILDDEPENDENCIES=
+export OPTIONALBUILDDEPENDENCIES=
+export LICENSEFILE=
+#export LICENSEFILE=LICENSE
+export LICENSETYPE="MIT/Public Domain"
+export DOWNLOADURL="https://github.com/karl-zylinski/jzon-c/tags"
+export INSTALLPREFIX=`pwd`/inst_$BASENAME-$VERSION
+export DOWNLOADSOURCEURL=https://github.com/karl-zylinski/jzon-c/archive/refs/tags/v$VERSION.tar.gz
+wl-showstatus download
+wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
+wl-wait4deps
+wl-showstatus extract
+tar xz --force-local -f $TARBALLDIR/$BASENAME/v$VERSION.tar.gz
+cd $BASENAME-$VERSION
+wl-showstatus build &&
+ ${CC:-gcc} -c -o jzon.o jzon.c -I. -O3 &&
+ ${AR:-ar} cru libjzon.a jzon.o &&
+ ( echo "EXPORTS" && ${NM:-nm} -f posix --defined-only -p libjzon.a | sed -n -e "s/^_\{0,1\}\([^ ]*\) T .*$/\1/p; s/^_\{0,1\}\([^ ]*\) D .*$/\1 DATA/p" ) > jzon.def &&
+ ${CC:-gcc} -shared -s -mwindows -def jzon.def -o jzon.dll libjzon.a -Wl,--out-implib,libjzon.dll.a &&
+ #${CC:-gcc} -c -o test.o test.c -I. -O3 &&
+ #${CC:-gcc} -o test.exe test.o libjzon.a &&
+ #./test.exe &&
+ wl-showstatus install &&
+ mkdir -p $INSTALLPREFIX/include $INSTALLPREFIX/lib $INSTALLPREFIX/bin &&
+ cp -f *.h $INSTALLPREFIX/include/ &&
+ cp -f *.a *.def $INSTALLPREFIX/lib/ &&
+ cp -f *.dll $INSTALLPREFIX/bin/ &&
+ wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
+
+
+
