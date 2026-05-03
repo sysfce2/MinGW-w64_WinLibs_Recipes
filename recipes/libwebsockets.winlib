@@ -292,12 +292,12 @@ EOF
 mv lib/roles/http/client/client-handshake.c lib/roles/http/client/client-handshake.c.bak &&
 echo "#define bzero(b,len) memset(b, 0, len)" > lib/roles/http/client/client-handshake.c &&
 cat lib/roles/http/client/client-handshake.c.bak >> lib/roles/http/client/client-handshake.c
-# fix missing bzero (version >= 3.1.0)
-for F in $(grep -l bzero $(find -name '*.c')); do
- mv $F $F.bak &&
- echo "#define bzero(b,len) memset(b, 0, len)" > $F &&
- cat $F.bak >> $F
-done
+## fix missing bzero (version >= 3.1.0)
+#for F in $(grep -l bzero $(find -name '*.c')); do
+# mv $F $F.bak &&
+# echo "#define bzero(b,len) memset(b, 0, len)" > $F &&
+# cat $F.bak >> $F
+#done
 # fix missing MBEDTLS_SSL_SERVER_NEW_SESSION_TICKET in lib/tls/mbedtls/wrapper/platform/ssl_pm.c (version >= 4.3.2)
 patch -ulbf lib/tls/mbedtls/wrapper/platform/ssl_pm.c << EOF
 @@ -551,2 +551,5 @@

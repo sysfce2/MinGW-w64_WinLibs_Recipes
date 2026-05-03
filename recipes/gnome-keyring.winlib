@@ -162,9 +162,9 @@ export TYPE=library
 #export VERSIONDATE=20200326
 #export VERSION=42.0
 #export VERSIONDATE=20220522
+####daemon/gkd-main.c:61:10: fatal error: gio/gunixinputstream.h: No such file or directory
 #export VERSION=42.1
 #export VERSIONDATE=20260503
-####daemon/gkd-main.c:61:10: fatal error: gio/gunixinputstream.h: No such file or directory
 #export VERSION=46.0
 #export VERSIONDATE=20240211
 #export VERSION=46.1
