@@ -135,8 +135,10 @@ export TYPE=library
 #export VERSIONDATE=20260129
 #export VERSION=0.6.8
 #export VERSIONDATE=20260203
-export VERSION=0.6.9
-export VERSIONDATE=20260407
+#export VERSION=0.6.9
+#export VERSIONDATE=20260407
+export VERSION=0.6.10
+export VERSIONDATE=20260503
 wl-showstatus --package-version
 #export DEPENDENCIES=utki,papki,treeml,svgren,svgdom,freetype2,libjpeg,libpng
 export DEPENDENCIES=utki,papki,tml,svgren,svgdom,freetype2,libjpeg,libpng
