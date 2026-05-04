@@ -156,12 +156,12 @@ wl-wait4deps
 wl-showstatus extract
 tar xz --force-local -f $TARBALLDIR/$BASENAME/$VERSION.tar.gz
 cd $BASENAME-$VERSION
-# don't abort on warnings (version >= 0.6.5)
-if ${CC:-gcc} --help -v 2>/dev/null|grep -q "\-Wmaybe-uninitialized"; then
- echo "this_cxxflags += -Wno-maybe-uninitialized" >> config/rel.mk
-fi
+## don't abort on warnings (version >= 0.6.5)
+#if ${CC:-gcc} --help -v 2>/dev/null|grep -q "\-Wmaybe-uninitialized"; then
+# echo "this_cxxflags += -Wno-maybe-uninitialized" >> config/rel.mk
+#fi
 wl-showstatus build &&
- make -I$MINGWPREFIX/include install this_lint_cmd= CC="${CC:-gcc}" CXX="${CXX:-g++}" AR=${AR:-ar} PREFIX=$INSTALLPREFIX &&
+ make -I$MINGWPREFIX/include install this_lint_cmd= CC="${CC:-gcc}" CXX="${CXX:-g++}" AR=${AR:-ar} CXXFLAGS="$(if ${CC:-gcc} --help -v 2>/dev/null|grep -q "\-Wmaybe-uninitialized" || ${CC:-gcc} --version|grep -q "^clang"; then echo "-Wno-error=maybe-uninitialized"; fi) $(if ${CC:-gcc} --help -v 2>/dev/null|grep -q "\-Wuninitialized" || ${CC:-gcc} --version|grep -q "^clang"; then echo "-Wno-error=uninitialized"; fi)" PREFIX=$INSTALLPREFIX &&
  wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
 
 

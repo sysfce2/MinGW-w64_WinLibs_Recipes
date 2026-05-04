@@ -163,8 +163,10 @@ export TYPE=library
 #export VERSIONDATE=20260322
 #export VERSION=1.4.347
 #export VERSIONDATE=20260428
-export VERSION=1.4.349
-export VERSIONDATE=20260413
+#export VERSION=1.4.349
+#export VERSIONDATE=20260413
+export VERSION=1.4.350
+export VERSIONDATE=20260504
 wl-showstatus --package-version
 export DEPENDENCIES=tinyxml2
 export OPTIONALDEPENDENCIES=
