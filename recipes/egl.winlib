@@ -148,8 +148,10 @@ export BASENAME=egl
 export DESCRIPTION="EGL 1.5 implementation for Windows and X11 supporting OpenGL"
 export CATEGORY=system,graphics
 export TYPE=library
-export VERSION=1.0.1
-export VERSIONDATE=20260420
+#export VERSION=1.0.1
+#export VERSIONDATE=20260420
+export VERSION=1.0.2
+export VERSIONDATE=20260504
 wl-showstatus --package-version
 export DEPENDENCIES=glew,vulkan-loader
 export OPTIONALDEPENDENCIES=

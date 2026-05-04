@@ -86,8 +86,10 @@ export TYPE=application
 #export VERSIONDATE=20250702
 #export VERSION=5.1.3
 #export VERSIONDATE=20251111
-export VERSION=5.1.4
-export VERSIONDATE=20251120
+#export VERSION=5.1.4
+#export VERSIONDATE=20251120
+export VERSION=5.2.0
+export VERSIONDATE=20260504
 wl-showstatus --package-version
 #export DEPENDENCIES=qt,boost,libtorrent-rasterbar,zlib,libiconv,openssl
 export DEPENDENCIES=qt6,boost,libtorrent-rasterbar,zlib,libiconv,openssl
