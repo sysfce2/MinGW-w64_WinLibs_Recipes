@@ -15,10 +15,10 @@ export TYPE=library
 #export VERSIONDATE=20241213
 #export VERSION=3.6.2
 #export VERSIONDATE=20250316
-export VERSION=3.6.3
-export VERSIONDATE=20250421
-#export VERSION=3.7.0
-#export VERSIONDATE=20260504
+#export VERSION=3.6.3
+#export VERSIONDATE=20250421
+export VERSION=3.7.0
+export VERSIONDATE=20260504
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=
@@ -40,8 +40,8 @@ cd $BASENAME-$VERSION
 #    echo OK
 # skip invalid flag
 sed -i.bak -e "s/-Wl,-z,relro,-z,now//" CMakeLists.txt
-## skip building tests
-#sed -i.bak2 -e "s?^add_subdirectory(tests?#&?" CMakeLists.txt
+# skip building tests
+sed -i.bak2 -e "s?^add_subdirectory(tests?#&?" CMakeLists.txt
 mkdir -p build_static build_shared &&
  wl-showstatus configure &&
  #cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=OFF -DSTACK_PROTECTOR:BOOL=OFF -S. -Bbuild_static &&

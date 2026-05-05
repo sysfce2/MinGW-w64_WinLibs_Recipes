@@ -54,14 +54,16 @@ export LICENSETYPE="MIT/Public domain"
 export DOWNLOADURL="https://github.com/Immediate-Mode-UI/Nuklear/tags"
 export INSTALLPREFIX=`pwd`/inst_$BASENAME-$VERSION
 #export DOWNLOADSOURCEURL=https://github.com/vurtun/nuklear/archive/$VERSION.tar.gz
-export DOWNLOADSOURCEURL=https://github.com/Immediate-Mode-UI/Nuklear/archive/refs/tags/$VERSION.tar.gz
+#export DOWNLOADSOURCEURL=https://github.com/Immediate-Mode-UI/Nuklear/archive/refs/tags/$VERSION.tar.gz
+export DOWNLOADSOURCEURL=https://github.com/Immediate-Mode-UI/Nuklear/archive/refs/tags/v$VERSION.tar.gz
 wl-showstatus download
 wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
 #mv $TARBALLDIR/$BASENAME/$VERSION.tar.gz $TARBALLDIR/$BASENAME/$BASENAME-$VERSION.tar.gz
 wl-wait4deps
 wl-showstatus extract
 #tar xz --force-local -f $TARBALLDIR/$BASENAME/$BASENAME-$VERSION.tar.gz
-tar xz --force-local -f $TARBALLDIR/$BASENAME/$VERSION.tar.gz
+#tar xz --force-local -f $TARBALLDIR/$BASENAME/$VERSION.tar.gz
+tar xz --force-local -f $TARBALLDIR/$BASENAME/v$VERSION.tar.gz
 cd Nuklear-$VERSION
 #patch -ulbf nuklear.h << EOF
 #@@ -187,2 +187,4 @@
