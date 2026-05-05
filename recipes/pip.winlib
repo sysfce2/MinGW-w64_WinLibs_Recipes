@@ -74,8 +74,10 @@ export TYPE=application
 #export VERSIONDATE=20260131
 #export VERSION=26.0.1
 #export VERSIONDATE=20260205
-export VERSION=26.1
-export VERSIONDATE=20260427
+#export VERSION=26.1
+#export VERSIONDATE=20260427
+export VERSION=26.1.1
+export VERSIONDATE=20260505
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=

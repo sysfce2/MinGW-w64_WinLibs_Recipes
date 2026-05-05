@@ -366,6 +366,8 @@ patch -ulbf gn/build/gen.py << EOF
 EOF
 # create build_mingw.ninja.template (version >= main)
 cp -n gn/build/build_linux.ninja.template gn/build/build_mingw.ninja.template
+# fix undefined int64_t in src/gn/pool.h (version >= main)
+sed -i.bak -e "1i #include <cstdint>" src/gn/pool.h
 ## don't abort on warnings
 #sed -i.bak -e "s/'\(-Wall\|-Wextra\)',//g" gn/build/gen.py
 ## avoid invalid linker flag -Wl,--gc-sections
