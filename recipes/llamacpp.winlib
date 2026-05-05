@@ -1420,7 +1420,9 @@ export TYPE=library
 #export VERSIONDATE=20260503
 #export VERSION=b9012
 #export VERSIONDATE=20260504
-export VERSION=b9025
+#export VERSION=b9025
+#export VERSIONDATE=20260505
+export VERSION=b9030
 export VERSIONDATE=20260505
 wl-showstatus --package-version
 export DEPENDENCIES=ggml

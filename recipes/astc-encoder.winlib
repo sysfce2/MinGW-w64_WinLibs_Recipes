@@ -105,8 +105,10 @@ export TYPE=library,application
 ####undefined reference to `astcenc_main(int, char**)'
 #export VERSION=5.2.0
 #export VERSIONDATE=20250214
-export VERSION=5.3.0
-export VERSIONDATE=20250521
+#export VERSION=5.3.0
+#export VERSIONDATE=20250521
+export VERSION=5.4.0
+export VERSIONDATE=20260505
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=

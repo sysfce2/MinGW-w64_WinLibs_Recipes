@@ -16,8 +16,10 @@ export TYPE=application
 #export VERSIONDATE=20230909
 #export VERSION=24.5.10
 #export VERSIONDATE=20240510
-export VERSION=26.3.27
-export VERSIONDATE=20260327
+#export VERSION=26.3.27
+#export VERSIONDATE=20260327
+export VERSION=26.5.5
+export VERSIONDATE=20260505
 wl-showstatus --package-version
 export DEPENDENCIES=gmp,libffi,bdwgc
 export OPTIONALDEPENDENCIES=
