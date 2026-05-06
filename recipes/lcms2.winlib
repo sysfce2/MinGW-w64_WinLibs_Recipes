@@ -48,8 +48,10 @@ export TYPE=library
 #export VERSION=2.18
 #export VERSIONDATE=20251201
 ####configure: error: cannot find install-sh, install.sh, or shtool in "." "./.." "./../.."
-export VERSION=2.19
-export VERSIONDATE=20260424
+#export VERSION=2.19
+#export VERSIONDATE=20260424
+export VERSION=2.19.1
+export VERSIONDATE=20260506
 wl-showstatus --package-version
 export DEPENDENCIES=zlib,libjpeg,libtiff
 export OPTIONALDEPENDENCIES=

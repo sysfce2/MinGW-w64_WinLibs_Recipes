@@ -490,7 +490,9 @@ export TYPE=library
 #export VERSIONDATE=20260428
 #export VERSION=10.0.1
 #export VERSIONDATE=20260429
-export VERSION=10.0.2
+#export VERSION=10.0.2
+#export VERSIONDATE=20260506
+export VERSION=10.0.3
 export VERSIONDATE=20260506
 wl-showstatus --package-version
 export DEPENDENCIES=sqlite3

@@ -87,6 +87,8 @@ if ${CC:-gcc} --version|grep -q "^clang" && ! ${CC:-gcc} --help|grep -q auto-imp
 fi
 ## force building shared libraries
 #sed -i.bak -e "s/^\(\s*\)\(can_build_shared\|ld_shlibs\)=no/\1\2=yes/" configure libcharset/configure
+## fix invalid -link (versions >= 1.19)
+#sed -i.bak -e "s/\(\s\)\(mingw\*\)/\1*\2/" configure libcharset/configure
 wl-showstatus configure &&
  #./configure --prefix=$INSTALLPREFIX --build=$BUILDPLATFORM --host=$RUNPLATFORM --enable-static --enable-shared &&
  #./configure --prefix=$INSTALLPREFIX --build=$BUILDPLATFORM --host=$RUNPLATFORM --enable-static --enable-shared --enable-relocatable LDFLAGS="-static-libgcc -static-libstdc++" &&
