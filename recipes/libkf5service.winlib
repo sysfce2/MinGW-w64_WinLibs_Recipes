@@ -115,8 +115,8 @@ export VERSION=5.116.0
 export VERSIONDATE=20240519
 ####Note: for higher versions see libkf6*
 wl-showstatus --package-version
-export DEPENDENCIES=qt,libkf5config,libkf5coreaddons,libkf5crash,libkf5dbusaddons,libkf5i18n
-export OPTIONALDEPENDENCIES=libkf5doctools
+export DEPENDENCIES=qt,libkf5config,libkf5coreaddons,libkf5crash,libkf5dbusaddons,libkf5i18n,libkf5doctools
+export OPTIONALDEPENDENCIES=
 #export BUILDDEPENDENCIES=cmake,extra-cmake-modules
 #export OPTIONALBUILDDEPENDENCIES=
 export BUILDDEPENDENCIES=cmake,ninja,extra-cmake-modules
