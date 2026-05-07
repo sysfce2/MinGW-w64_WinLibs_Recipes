@@ -80,8 +80,10 @@ export TYPE=library
 #export VERSIONDATE=20250220
 #export VERSION=1.9.11
 #export VERSIONDATE=20250620
-export VERSION=1.9.12
-export VERSIONDATE=20260126
+#export VERSION=1.9.12
+#export VERSIONDATE=20260126
+export VERSION=1.9.13
+export VERSIONDATE=20260507
 wl-showstatus --package-version
 #export DEPENDENCIES=boost,zlib,brotli,jsoncpp,trantor,sqlite3,postgresql
 #export DEPENDENCIES=boost,zlib,brotli,jsoncpp,trantor,sqlite3,postgresql,mariadb-client
@@ -201,15 +203,15 @@ mkdir -p build_static build_shared &&
  #cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=OFF -DBUILD_DROGON_SHARED:BOOL=OFF -DUSE_SQLITE3:BOOL=ON -DUSE_POSTGRESQL:BOOL=ON -DUSE_MYSQL:BOOL=OFF -DCMAKE_MODULE_PATH:PATH=$MINGWPREFIX/lib/cmake -DBUILD_EXAMPLES:BOOL=OFF -DBUILD_TESTS:BOOL=OFF -S. -Bbuild_static &&
  #cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=OFF -DBUILD_DROGON_SHARED:BOOL=OFF -DUSE_SQLITE3:BOOL=ON -DUSE_POSTGRESQL:BOOL=ON -DUSE_MYSQL:BOOL=ON -DMYSQL_INCLUDE_DIR:PATH=$MINGWPREFIX/include/mariadb -DCMAKE_MODULE_PATH:PATH=$MINGWPREFIX/lib/cmake -DBUILD_EXAMPLES:BOOL=OFF -DBUILD_TESTS:BOOL=OFF -DMYSQL_INCLUDE_DIRS=$MINGWPREFIX/include/mariadb -S. -Bbuild_static &&
  cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=OFF -DBUILD_DROGON_SHARED:BOOL=OFF -DUSE_SQLITE3:BOOL=ON -DUSE_POSTGRESQL:BOOL=ON -DUSE_MYSQL:BOOL=ON -DMYSQL_INCLUDE_DIR:PATH=$MINGWPREFIX/include/mariadb -DCMAKE_MODULE_PATH:PATH=$MINGWPREFIX/lib/cmake -DBUILD_EXAMPLES:BOOL=OFF -DBUILD_TESTS:BOOL=OFF -DMYSQL_INCLUDE_DIRS=$MINGWPREFIX/include/mariadb -DCMAKE_CXX_FLAGS:STRING="-D_WIN32_WINNT=0x0602" -S. -Bbuild_static &&
- # fix missing library
- sed -i.bak -e "s/^\s*LINK_LIBRARIES\s*=.*-ladvapi32/& -Wl,--as-needed -lyaml-cpp/" build_static/build.ninja &&
+ ## fix missing library (version <= 1.9.12)
+ #sed -i.bak -e "s/^\s*LINK_LIBRARIES\s*=.*-ladvapi32/& -Wl,--as-needed -lyaml-cpp/" build_static/build.ninja &&
  wl-showstatus configure &&
  #cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=ON -DBUILD_DROGON_SHARED:BOOL=ON -DUSE_SQLITE3:BOOL=ON -DUSE_POSTGRESQL:BOOL=ON -DUSE_MYSQL:BOOL=OFF -DCMAKE_MODULE_PATH:PATH=$MINGWPREFIX/lib/cmake -DBUILD_EXAMPLES:BOOL=OFF -DBUILD_TESTS:BOOL=OFF -S. -Bbuild_shared &&
  #cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=ON -DBUILD_DROGON_SHARED:BOOL=ON -DUSE_SQLITE3:BOOL=ON -DUSE_POSTGRESQL:BOOL=ON -DUSE_MYSQL:BOOL=ON -DMYSQL_INCLUDE_DIR:PATH=$MINGWPREFIX/include/mariadb -DCMAKE_MODULE_PATH:PATH=$MINGWPREFIX/lib/cmake -DBUILD_EXAMPLES:BOOL=OFF -DBUILD_TESTS:BOOL=OFF -DMYSQL_INCLUDE_DIRS=$MINGWPREFIX/include/mariadb -S. -Bbuild_shared &&
  cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=ON -DBUILD_DROGON_SHARED:BOOL=ON -DUSE_SQLITE3:BOOL=ON -DUSE_POSTGRESQL:BOOL=ON -DUSE_MYSQL:BOOL=ON -DMYSQL_INCLUDE_DIR:PATH=$MINGWPREFIX/include/mariadb -DCMAKE_MODULE_PATH:PATH=$MINGWPREFIX/lib/cmake -DBUILD_EXAMPLES:BOOL=OFF -DBUILD_TESTS:BOOL=OFF -DMYSQL_INCLUDE_DIRS=$MINGWPREFIX/include/mariadb -DCMAKE_CXX_FLAGS:STRING="-D_WIN32_WINNT=0x0602" -S. -Bbuild_shared &&
- # fix missing library
- #sed -i.bak -e "s/^\s*LINK_LIBRARIES\s*=.*-ladvapi32/& -Wl,--as-needed -lws2_32 -lrpcrt4/" build_shared/build.ninja &&
- sed -i.bak -e "s/^\s*LINK_LIBRARIES\s*=.*-ladvapi32/& -Wl,--as-needed -lyaml-cpp/" build_shared/build.ninja &&
+ ## fix missing library (version <= 1.9.12)
+ ##sed -i.bak -e "s/^\s*LINK_LIBRARIES\s*=.*-ladvapi32/& -Wl,--as-needed -lws2_32 -lrpcrt4/" build_shared/build.ninja &&
+ #sed -i.bak -e "s/^\s*LINK_LIBRARIES\s*=.*-ladvapi32/& -Wl,--as-needed -lyaml-cpp/" build_shared/build.ninja &&
  wl-showstatus build-install &&
  ninja -Cbuild_static install/strip &&
  wl-showstatus build-install &&
