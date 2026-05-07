@@ -882,8 +882,10 @@ export TYPE=library
 #export VERSIONDATE=20260422
 #export VERSION=5.4.110
 #export VERSIONDATE=20260501
-export VERSION=5.4.111
-export VERSIONDATE=20260505
+#export VERSION=5.4.111
+#export VERSIONDATE=20260505
+export VERSION=5.4.113
+export VERSIONDATE=20260507
 wl-showstatus --package-version
 export DEPENDENCIES=libdl,bcg729,bctoolbox,ffmpeg4,libbzrtp,libgsm,libopus,libortp,portaudio,pulseaudio,libspeex,libspeexdsp,sqlite3,srtp,libtheora,libxml2,libvpx
 #export DEPENDENCIES=libdl,bcg729,bctoolbox,ffmpeg4,libbzrtp,libgsm,libopus,libortp,portaudio,pulseaudio,libspeex,libspeexdsp,sqlite3,srtp,libtheora,libxml2,libvpx,khronos-opengl-registry

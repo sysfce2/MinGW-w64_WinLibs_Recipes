@@ -170,10 +170,10 @@ export TYPE=library
 #export VERSION=3.11.0
 #export VERSIONDATE=20260316
 ####build/include/public/botan/p11.h:112:19: error: 'CKA_SUBPRIME_BITS' was not declared in this scope
-export VERSION=3.11.1
-export VERSIONDATE=20260331
-#export VERSION=3.12.0
-#export VERSIONDATE=20260507
+#export VERSION=3.11.1
+#export VERSIONDATE=20260331
+export VERSION=3.12.0
+export VERSIONDATE=20260507
 wl-showstatus --package-version
 export DEPENDENCIES=pthreads,zlib,libbz2,xz,boost,sqlite3
 #export DEPENDENCIES=pthreads,zlib,libbz2,xz,boost,sqlite3,nss,nspr
@@ -280,7 +280,8 @@ wl-showstatus configure &&
  #$PYDIR/python.exe configure.py --prefix=$INSTALLPREFIX --enable-shared-library --enable-static-library --os=mingw --cpu=$(if ( echo $RUNPLATFORM | grep -qv x86_64 ); then echo x86_32; else echo x86_64; fi) --enable-shared --without-openssl --with-zlib --with-bzip2 --with-sqlite3 &&
  #$PYDIR/python.exe configure.py --prefix=$INSTALLPREFIX --enable-shared-library --enable-static-library --os=mingw --cpu=$(if ( echo $RUNPLATFORM | grep -qv x86_64 ); then echo x86_32; else echo x86_64; fi) --enable-shared --without-openssl --with-zlib --with-bzip2 --with-lzma --with-sqlite3 --with-boost --link-method=copy --ldflags="-Wl,--as-needed -lmswsock" &&
  #$PYDIR/python.exe configure.py --prefix=$INSTALLPREFIX --enable-shared-library --enable-static-library --os=mingw --cpu=$(if ( echo $RUNPLATFORM | grep -qv x86_64 ); then echo x86_32; else echo x86_64; fi) --enable-shared --with-zlib --with-bzip2 --with-lzma --with-sqlite3 --with-boost --link-method=copy --ldflags="-Wl,--as-needed -lmswsock" &&
- $PYDIR/python.exe configure.py --prefix=$INSTALLPREFIX --enable-shared-library --enable-static-library --os=mingw --cpu=$(if ( echo $RUNPLATFORM | grep -qv x86_64 ); then echo x86_32; else echo x86_64; fi) --enable-shared --with-zlib --with-bzip2 --with-lzma --with-sqlite3 --with-boost --link-method=copy --ldflags="-Wl,--as-needed -lmswsock" &&
+ #$PYDIR/python.exe configure.py --prefix=$INSTALLPREFIX --enable-shared-library --enable-static-library --os=mingw --cpu=$(if ( echo $RUNPLATFORM | grep -qv x86_64 ); then echo x86_32; else echo x86_64; fi) --enable-shared --with-zlib --with-bzip2 --with-lzma --with-sqlite3 --with-boost --link-method=copy --ldflags="-Wl,--as-needed -lmswsock" &&
+ $PYDIR/python.exe configure.py --prefix=$INSTALLPREFIX --enable-shared-library --enable-static-library --os=mingw --cpu=$(if ( echo $RUNPLATFORM | grep -qv x86_64 ); then echo x86_32; else echo x86_64; fi) --enable-shared --with-zlib --with-bzip2 --with-lzma --with-sqlite3 --with-boost --link-method=copy --cxxflags="-fpermissive" --ldflags="-Wl,--as-needed -lmswsock" &&
  #$PYDIR/python.exe configure.py --prefix=$INSTALLPREFIX --enable-shared-library --enable-static-library --os=mingw --cpu=$(if ( echo $RUNPLATFORM | grep -qv x86_64 ); then echo x86_32; else echo x86_64; fi) --enable-shared --with-zlib --with-bzip2 --with-lzma --with-sqlite3 --with-boost --link-method=copy --with-external-includedir=$MINGWPREFIX/include/nspr --ldflags="-Wl,--as-needed -lmswsock" &&
  #--cxxflags="-DBOTAN_DLL=__declspec\\\\(dllexport\\\\)" 
  wl-showstatus build-install &&
@@ -291,9 +292,12 @@ wl-showstatus configure &&
  sed -i.bak -e "s/\(\"libname\": \"\)\(botan-3\"\)/\1lib\2/" build/build_config.json &&
  #( make install LN="cp -f" || make install CXX="${CXX:-g++} -std=c++11" LN="cp -f" ) &&
  #PATH=$PYDIR:$PATH ( make install LN="cp -f" || make install CXX="${CXX:-g++} -std=c++11" LN="cp -f" ) &&
- # make sure to use local pkcs11.h (version >= 3.3.0)
- sed -i.bak -e "s?\(\"\)\(pkcs11\.h\"\)?\1../../external/\2?" build/include/public/botan/p11.h &&
- PATH=$PYDIR:$PATH make install &&
+ #PATH=$PYDIR:$PATH make install &&
+ ( PATH=$PYDIR:$PATH make install || (
+  # make sure to use local pkcs11.h (version >= 3.3.0)
+  sed -i.bak -e "s?\(#include <\)\(pkcs11\.h\)?\1../external/\2?" build/include/public/botan/p11.h &&
+  PATH=$PYDIR:$PATH make install
+ )) &&
  #PATH=$PYDIR:$PATH make install CXXFLAGS="-fpermissive" &&
  #PATH=$PYDIR:$PATH make CXXFLAGS="-O3 -momit-leaf-frame-pointer -DBOTAN_DLL=__declspec\(dllexport\)" &&
  #g++ -shared -s -mwindows -Wl,--export-all-symbols -o libbotan-2.dll libbotan-2.a -Wl,--out-implib,libbotan-2.dll.a &&

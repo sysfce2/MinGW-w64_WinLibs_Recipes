@@ -33,9 +33,11 @@ cd $BASENAME-$VERSION
 sed -i.bak -e "s/\(ADD_LIBRARY(.*\) SHARED/\1/i" templates/lib/CMakeLists.txt textdocument/lib/CMakeLists.txt
 mkdir -p build_static build_shared &&
  wl-showstatus configure &&
- PATH=$PATH:$MINGWPREFIX/qt/bin QTDIR=$MINGWPREFIX/qt QMAKESPEC=$MINGWPREFIX/qt/mkspecs/win32-g++ cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=OFF -DBUILD_TESTS:BOOL=OFF -DCMAKE_MODULE_LINKER_FLAGS:STRING="-Wl,--allow-multiple-definition" -S. -Bbuild_static &&
+ #PATH=$PATH:$MINGWPREFIX/qt/bin QTDIR=$MINGWPREFIX/qt QMAKESPEC=$MINGWPREFIX/qt/mkspecs/win32-g++ cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=OFF -DBUILD_TESTS:BOOL=OFF -DCMAKE_MODULE_LINKER_FLAGS:STRING="-Wl,--allow-multiple-definition" -S. -Bbuild_static &&
+ PATH=$PATH:$MINGWPREFIX/qt/bin QTDIR=$MINGWPREFIX/qt QMAKESPEC=$MINGWPREFIX/qt/mkspecs/win32-g++ cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=OFF -DBUILD_TESTS:BOOL=OFF -DCMAKE_CXX_FLAGS:STRING="$(if ${CC:-gcc} --help -v 2>/dev/null|grep -q "\-Wtemplate-id-cdtor" || ${CC:-gcc} --version|grep -q "^clang"; then echo "-Wno-error=template-id-cdtor"; fi)" -DCMAKE_MODULE_LINKER_FLAGS:STRING="-Wl,--allow-multiple-definition" -S. -Bbuild_static &&
  wl-showstatus configure &&
- PATH=$PATH:$MINGWPREFIX/qt/bin QTDIR=$MINGWPREFIX/qt QMAKESPEC=$MINGWPREFIX/qt/mkspecs/win32-g++ cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=ON -DBUILD_TESTS:BOOL=OFF -S. -Bbuild_shared &&
+ #PATH=$PATH:$MINGWPREFIX/qt/bin QTDIR=$MINGWPREFIX/qt QMAKESPEC=$MINGWPREFIX/qt/mkspecs/win32-g++ cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=ON -DBUILD_TESTS:BOOL=OFF -S. -Bbuild_shared &&
+ PATH=$PATH:$MINGWPREFIX/qt/bin QTDIR=$MINGWPREFIX/qt QMAKESPEC=$MINGWPREFIX/qt/mkspecs/win32-g++ cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_SHARED_LIBS:BOOL=ON -DBUILD_TESTS:BOOL=OFF -DCMAKE_CXX_FLAGS:STRING="$(if ${CC:-gcc} --help -v 2>/dev/null|grep -q "\-Wtemplate-id-cdtor" || ${CC:-gcc} --version|grep -q "^clang"; then echo "-Wno-error=template-id-cdtor"; fi)" -S. -Bbuild_shared &&
  wl-showstatus build-install &&
  ninja -Cbuild_static install/strip &&
  wl-showstatus build-install &&
