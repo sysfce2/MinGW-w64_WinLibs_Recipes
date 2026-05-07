@@ -248,8 +248,8 @@ mkdir -p m4 &&
  for WX_DEBUG in no ; do
   for WX_STATIC in yes ; do
   #for WX_STATIC in yes no ; do
-   #for WX_UNICODE in no yes ; do
-   for WX_UNICODE in yes ; do
+   for WX_UNICODE in no yes ; do
+   #for WX_UNICODE in yes ; do
     wl-showstatus configure &&
     mkdir -p build_debug_$WX_DEBUG\_static_$WX_STATIC\_unicode_$WX_UNICODE &&
     cd build_debug_$WX_DEBUG\_static_$WX_STATIC\_unicode_$WX_UNICODE &&
@@ -261,8 +261,8 @@ mkdir -p m4 &&
  for WX_DEBUG in no ; do
   for WX_STATIC in yes ; do
   #for WX_STATIC in yes no ; do
-   #for WX_UNICODE in no yes ; do
-   for WX_UNICODE in yes ; do
+   for WX_UNICODE in no yes ; do
+   #for WX_UNICODE in yes ; do
     wl-showstatus build-install &&
     #( PATH=$MINGWPREFIX/wx/lib/gcc_dll:$PATH make -Cbuild_debug_$WX_DEBUG\_static_$WX_STATIC\_unicode_$WX_UNICODE install-strip || PATH=$MINGWPREFIX/wx/lib/gcc_dll:$PATH make -Cbuild_debug_$WX_DEBUG\_static_$WX_STATIC\_unicode_$WX_UNICODE install-strip CXX="${CXX:-g++} -std=c++11" )
     #( PATH=$MINGWPREFIX/wx/lib/gcc_dll:$PATH LIBRARY_PATH=$MINGWPREFIX/wx/lib/gcc_$(if [ "$WX_STATIC" == "yes" ]; then echo "lib"; else echo "dll"; fi)${LIBRARY_PATH:+:$LIBRARY_PATH} make -Cbuild_debug_$WX_DEBUG\_static_$WX_STATIC\_unicode_$WX_UNICODE install-strip || PATH=$MINGWPREFIX/wx/lib/gcc_dll:$PATH LIBRARY_PATH=$MINGWPREFIX/wx/lib/gcc_$(if [ "$WX_STATIC" == "yes" ]; then echo "lib"; else echo "dll"; fi)${LIBRARY_PATH:+:$LIBRARY_PATH} make -Cbuild_debug_$WX_DEBUG\_static_$WX_STATIC\_unicode_$WX_UNICODE install-strip CXX="${CXX:-g++} -std=c++11" || break 3 )

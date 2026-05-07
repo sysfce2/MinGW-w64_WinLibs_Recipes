@@ -23,6 +23,19 @@ wl-wait4deps
 wl-showstatus extract
 tar xz --force-local -f $TARBALLDIR/$BASENAME/$VERSION.tar.gz
 cd $BASENAME-$VERSION
+# fix already defined false/true in include/mps/types.h
+patch -ulbf include/mps/types.h << EOF
+@@ -8,4 +8,9 @@
+ #ifndef __MPS_NOT_DEFINE_BOOL
++#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202311L
++#include <stdbool.h>
++typedef bool mps_boolean;
++#else
+ typedef enum
+ { false = 0, true = 1 } mps_boolean;
++#endif
+ #else
+EOF
 wl-showstatus preconfigure &&
  autoreconf -f -i -I m4 -I $MINGWPREFIX/share/aclocal &&
  wl-showstatus configure &&
