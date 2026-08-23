@@ -49,13 +49,26 @@ patch -ulbf glib/glibmm/threads.h << EOF
 -  GPrivate* gobj() { return gobject_; }
 +  GPrivate* gobj() { return &gobject_; }
 EOF
-## fix gio/giomm/dbusactiongroup.h (version >= 2.62.0)
-#patch -ulbf gio/giomm/dbusactiongroup.h << EOF
-#@@ -31,3 +31,2 @@
-# using GDBusActionGroup = struct _GDBusActionGroup;
-#-using GDBusActionGroupClass = struct _GDBusActionGroupClass;
-# #endif /* DOXYGEN_SHOULD_SKIP_THIS */
-#EOF
+# fix gio/giomm/dbusactiongroup.h (version >= 2.62.0)
+patch -ulbf gio/giomm/dbusactiongroup.h << EOF
+@@ -30,2 +30,4 @@
+ #ifndef DOXYGEN_SHOULD_SKIP_THIS
++#include <gobject/gtype.h>
++#define GDBusActionGroupClass GLIBMM_GDBusActionGroupClass
+ using GDBusActionGroup = struct _GDBusActionGroup;
+EOF
+# fix gio/giomm/emblem.h (version >= 2.62.0)
+patch -ulbf gio/giomm/emblem.h << EOF
+@@ -29,2 +29,5 @@
+ #ifndef DOXYGEN_SHOULD_SKIP_THIS
++#include <gio/gio.h>
++#define GEmblem GLIBMM_GEmblem
++#define GEmblemClass GLIBMM_GEmblemClass
+ using GEmblem = struct _GEmblem;
+EOF
+## fix warning: template-id not allowed for constructor in C++20 (version >= 2.62.0)
+#sed -i.bak -e "s/^\(  \)\(explicit \|\)\(Variant\)<.*>\((.*)\)/\1\2\3\4/" glib/glibmm/variant.h
+#sed -i.bak -e "s/^\(  \)\(explicit \|\)\(Variant\)<.*>\((.*)\)/\1\2\3\4/" glib/glibmm/variant_basictypes.h
 ## skip making examples
 #cat > examples/Makefile.in << EOF
 #all:

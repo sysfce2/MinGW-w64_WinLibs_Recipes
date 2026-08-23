@@ -28,8 +28,10 @@ export TYPE=library
 #export VERSIONDATE=20251112
 #export VERSION=0.13.1
 #export VERSIONDATE=20251212
-export VERSION=0.14.0
-export VERSIONDATE=20260810
+#export VERSION=0.14.0
+#export VERSIONDATE=20260810
+export VERSION=0.14.1
+export VERSIONDATE=20260823
 wl-showstatus --package-version
 export DEPENDENCIES=pthreads
 export OPTIONALDEPENDENCIES=
