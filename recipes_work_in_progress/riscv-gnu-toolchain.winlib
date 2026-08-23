@@ -251,8 +251,10 @@ export TYPE=application
 #export VERSIONDATE=20260710
 #export VERSION=2026.07.11
 #export VERSIONDATE=20260713
-export VERSION=2026.07.15
-export VERSIONDATE=20260715
+#export VERSION=2026.07.15
+#export VERSIONDATE=20260715
+export VERSION=2026.08.23
+export VERSIONDATE=20260823
 wl-showstatus --package-version
 export DEPENDENCIES=zlib,gmp,mpfr,mpc,gperf
 export OPTIONALDEPENDENCIES=

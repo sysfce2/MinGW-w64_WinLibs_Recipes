@@ -12,8 +12,10 @@ export TYPE=library
 #export BUILDDEPENDENCIES=cmake,ninja
 #export OPTIONALBUILDDEPENDENCIES=
 ##export OPTIONALBUILDDEPENDENCIES=sphinx
-export VERSION=5.4.12
-export VERSIONDATE=20250723
+#export VERSION=5.4.12
+#export VERSIONDATE=20250723
+export VERSION=5.4.13
+export VERSIONDATE=20260823
 wl-showstatus --package-version
 export DEPENDENCIES=sqlite3,mman-win32
 export OPTIONALDEPENDENCIES=
@@ -38,6 +40,22 @@ patch -ulbf src/fdr/fdr_engine_description.cpp << EOF
 -            desiredStride = std::min(min_len - 1, 2UL);
 +            desiredStride = std::min((unsigned long)min_len - 1, 2UL);
          }
+EOF
+# fix missing sysconf(_SC_PAGE_SIZE) in unit/internal/shufti.cpp (version >= 5.4.13)
+patch -ulbf unit/internal/shufti.cpp << EOF
+@@ -33,2 +33,12 @@
+ #include <sys/mman.h>
++#ifdef _WIN32
++#include <windows.h>
++#define _SC_PAGE_SIZE 0
++inline size_t sysconf(int dummy)
++{
++  SYSTEM_INFO sysinfo;
++  GetSystemInfo(&sysinfo);
++  return sysinfo.dwPageSize;
++}
++#endif
+
 EOF
 # fix missing symbol export
 echo "hs_compile_lit_multi" >> hs.def

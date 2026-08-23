@@ -311,8 +311,10 @@ export TYPE=library
 #export VERSIONDATE=20260419
 #export VERSION=4.13.5
 #export VERSIONDATE=20260427
-export VERSION=4.13.6
-export VERSIONDATE=20260505
+#export VERSION=4.13.6
+#export VERSIONDATE=20260505
+export VERSION=4.14
+export VERSIONDATE=20260823
 wl-showstatus --package-version
 #export DEPENDENCIES=zlib,zstd
 #export DEPENDENCIES=zlib,zstd,fmt,hiredis,xxhash,mman-win32
