@@ -157,6 +157,8 @@ export VERSIONDATE=20220318
 #export VERSIONDATE=20260812
 #export VERSION=153
 #export VERSIONDATE=20260818
+#export VERSION=151_7922_170
+#export VERSIONDATE=20260824
 wl-showstatus --package-version
 export DEPENDENCIES=
 #export DEPENDENCIES=wuffs

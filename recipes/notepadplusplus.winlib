@@ -392,6 +392,8 @@ export VERSIONDATE=20260216
 #export VERSIONDATE=20260604
 #export VERSION=8.9.7
 #export VERSIONDATE=20260714
+#export VERSION=8.9.8
+#export VERSIONDATE=20260824
 wl-showstatus --package-version
 export DEPENDENCIES=tinyxml
 export OPTIONALDEPENDENCIES=

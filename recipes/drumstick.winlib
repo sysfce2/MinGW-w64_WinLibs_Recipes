@@ -112,7 +112,7 @@ wl-wait4deps
 wl-showstatus extract
 tar xj --force-local -f $TARBALLDIR/$BASENAME/$BASENAME-$VERSION.tar.bz2
 cd $BASENAME-$VERSION
-# fix relative path in INTERFACE_INCLUDE_DIRECTORIES
+# fix relative path in INTERFACE_INCLUDE_DIRECTORIES (version <= 2.10.0)
 ####CMake Error in library/rt-backends/fluidsynth/CMakeLists.txt: Target "PkgConfig::FLUIDSYNTH" contains relative path in its INTERFACE_INCLUDE_DIRECTORIES: "../../include"
 echo 'SET_TARGET_PROPERTIES(PkgConfig::FLUIDSYNTH PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "")' >> library/rt-backends/fluidsynth/CMakeLists.txt
 mkdir -p build_static build_shared &&

@@ -1,39 +1,32 @@
-export NAME="Crown Engine"
+export NAME="The Modular Platform (includes MAX & Mojo)"
 export STATUS=
-export URL=https://www.crownengine.org/
-export BASENAME=crown
-export DESCRIPTION="A complete and cross-platform game engine designed for flexibility, performance and fast iteration."
-export CATEGORY=games
-export TYPE=library
-#export VERSION=0.63.9
-#export VERSIONDATE=20260807
-#export VERSION=0.64.0
-#export VERSIONDATE=20260811
-#export VERSION=0.64.1
-#export VERSIONDATE=20260812
-#export VERSION=0.64.2
-#export VERSIONDATE=20260816
-#export VERSION=0.64.3
-#export VERSIONDATE=20260821
-export VERSION=0.64.4
-export VERSIONDATE=20260824
+export URL=https://mojolang.org/
+#export URL=https://github.com/modular/modular
+export BASENAME=modular-max
+export DESCRIPTION="The Modular Platform, a unified platform for AI development and deployment, including the MAX Framework and the Mojo Language."
+export CATEGORY=development
+export TYPE=application
+export VERSION=26.5.0
+export VERSIONDATE=20260823
+####[FATAL 07:39:49.943 src/main/cpp/blaze.cc:1255] Nonexistent path in import declaration in config file 'd:\temp\modular-max-v26.5.0\.bazelrc': 'import %workspace%/build/wrapper.bazelrc' (are you in your source checkout/WORKSPACE?)
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=
 export BUILDDEPENDENCIES=
+#export BUILDDEPENDENCIES=cmake,ninja
+#export BUILDDEPENDENCIES=meson,ninja
 export OPTIONALBUILDDEPENDENCIES=
 export LICENSEFILE=LICENSE
-export LICENSETYPE=MIT/GPL
-#export DOWNLOADURL="https://www.crownengine.org/download/"
-export DOWNLOADURL="https://github.com/crownengine/crown/releases"
+export LICENSETYPE=Apache
+export DOWNLOADURL=""https://github.com/modular/modular/releases
 export INSTALLPREFIX=$PWD/inst_$BASENAME-$VERSION
-export DOWNLOADSOURCEURL=https://github.com/crownengine/crown/archive/refs/tags/v$VERSION.tar.gz
+export DOWNLOADSOURCEURL=https://github.com/modular/modular/archive/refs/tags/max/v$VERSION.tar.gz
 wl-showstatus download
 wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
 wl-wait4deps
 wl-showstatus extract
 tar xz --force-local -f $TARBALLDIR/$BASENAME/v$VERSION.tar.gz
-cd $BASENAME-$VERSION
+cd $BASENAME-v$VERSION
 
   ./configure --help 2> /dev/null
   cat meson_options.txt 2> /dev/null
@@ -41,7 +34,7 @@ cd $BASENAME-$VERSION
   ls -ld COPYING* LICENSE* LICENCE* COPYRIGHT* configure* m4 CMakeLists.txt cmake xmake.lua Makefile GNUmakefile setup.py scons SConscript SConstruct meson.build meson_options.txt meson.options.txt *.pro *.proj *.sln BUILD.gn .gn MODULE.bazel Cargo.toml build 2> /dev/null
 
 wl-showstatus build &&
- make -fmakefile OS=windows EXE_PREFIX= EXE_SUFFIX=.exe ARG_PREFIX=/ MKDIR="mkdir -p" CC="${CC:-gcc}" CXX="${CXX:-g++}" AR="${AR:-ar}" &&
+ make &&
  #make CC="${CC:-gcc}" CXX="${CXX:-g++}" LD="${LD:-ld}" AR="${AR:-ar}" &&
     echo OK
 
@@ -265,7 +258,7 @@ wl-showstatus configure &&
 # cargo install --root $INSTALLPREFIX --profile release --path . &&
 #    echo OK
 
-# wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
+# wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-v$VERSION
 
 
 
