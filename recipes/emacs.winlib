@@ -43,7 +43,7 @@ wl-wait4deps
 wl-showstatus extract
 tar xJ --force-local -f $TARBALLDIR/$BASENAME/$BASENAME-$VERSION.tar.xz
 cd $BASENAME-$VERSION
-# fix redefinition of lseek in nt/inc/ms-w32.h (version >= 30.2)
+# fix redefinition of lseek in nt/inc/ms-w32.h (version = 30.2)
 patch -ulbf nt/inc/ms-w32.h << EOF
 @@ -331,3 +331,3 @@
  /* MinGW64 defines lseek to invoke lseek64.  */
@@ -56,7 +56,8 @@ wl-showstatus configure &&
  #--without-included-regex
  #--without-x-toolkit 
  #CFLAGS="-std=c17" 
- echo "#undef HAVE_X_WINDOWS" >> src/config.log &&
+ #echo "#undef HAVE_X_WINDOWS" >> src/config.log &&
+ #echo "#undef HAVE_XIM" >> src/config.log &&
  wl-showstatus build-install &&
  make install-strip &&
  wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
