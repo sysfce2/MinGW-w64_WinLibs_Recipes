@@ -103,6 +103,8 @@ export TYPE=library
 #export VERSIONDATE=20250822
 export VERSION=8.0.6
 export VERSIONDATE=20260511
+#export VERSION=8.0.7
+#export VERSIONDATE=20260824
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=
@@ -110,11 +112,12 @@ export BUILDDEPENDENCIES=
 export OPTIONALBUILDDEPENDENCIES=
 export LICENSEFILE=COPYING
 export LICENSETYPE=
-export DOWNLOADURL="http://download.dre.vanderbilt.edu/ ACE-src-"
-#export DOWNLOADURL="https://github.com/DOCGroup/ACE_TAO/releases ACE+TAO-"
+#export DOWNLOADURL="http://download.dre.vanderbilt.edu/ ACE-src-"
+export DOWNLOADURL="https://github.com/DOCGroup/ACE_TAO/releases ACE+TAO-"
 export INSTALLPREFIX=`pwd`/inst_$BASENAME-$VERSION
 #export DOWNLOADSOURCEURL=http://download.dre.vanderbilt.edu/previous_versions/ACE-src-$VERSION.tar.bz2
 export DOWNLOADSOURCEURL=http://download.dre.vanderbilt.edu/previous_versions/ACE-$VERSION.tar.bz2
+#export DOWNLOADSOURCEURL=https://github.com/DOCGroup/ACE_TAO/releases/download/ACE%2BTAO-$(echo $VERSION|tr . _)/ACE-src-$VERSION.tar.bz2
 wl-showstatus download
 wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
 wl-wait4deps

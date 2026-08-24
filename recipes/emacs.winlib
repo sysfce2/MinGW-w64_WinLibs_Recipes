@@ -23,6 +23,8 @@ export TYPE=application
 #export VERSIONDATE=20250224
 export VERSION=30.2
 export VERSIONDATE=20250814
+#export VERSION=31.1
+#export VERSIONDATE=20260824
 wl-showstatus --package-version
 export DEPENDENCIES=zlib,gnutls,json,cairo,imagemagick,harfbuzz,libotf,dbus
 export OPTIONALDEPENDENCIES=
@@ -41,10 +43,20 @@ wl-wait4deps
 wl-showstatus extract
 tar xJ --force-local -f $TARBALLDIR/$BASENAME/$BASENAME-$VERSION.tar.xz
 cd $BASENAME-$VERSION
+# fix redefinition of lseek in nt/inc/ms-w32.h (version >= 30.2)
+patch -ulbf nt/inc/ms-w32.h << EOF
+@@ -331,3 +331,3 @@
+ /* MinGW64 defines lseek to invoke lseek64.  */
+-#ifndef lseek
++#if !defined(lseek) && !defined(__MINGW32__)
+ #define lseek     _lseek
+EOF
 wl-showstatus configure &&
  ./configure --prefix=$INSTALLPREFIX --build=$BUILDPLATFORM --host=$RUNPLATFORM --with-w32 --with-file-notification=w32 --without-libsystemd --with-cairo --with-imagemagick --without-x --with-included-regex &&
  #--without-included-regex
+ #--without-x-toolkit 
  #CFLAGS="-std=c17" 
+ echo "#undef HAVE_X_WINDOWS" >> src/config.log &&
  wl-showstatus build-install &&
  make install-strip &&
  wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION

@@ -49,10 +49,12 @@ export BASENAME=nanogui
 export DESCRIPTION="NanoGUI is a minimalistic cross-platform widget library for OpenGL 3+, GLES 2/3, and Metal. It supports automatic layout generation, stateful C++ lambdas callbacks, a variety of useful widget types and Retina-capable rendering on Apple devices."
 export CATEGORY=gui
 export TYPE=library
-export VERSION=0.2.0
-export VERSIONDATE=20250121
+#export VERSION=0.2.0
+#export VERSIONDATE=20250121
+export VERSION=0.4.0
+export VERSIONDATE=20260824
 wl-showstatus --package-version
-export DEPENDENCIES=
+export DEPENDENCIES=glfw3,nativefiledialog
 export OPTIONALDEPENDENCIES=
 export BUILDDEPENDENCIES=cmake,ninja
 export OPTIONALBUILDDEPENDENCIES=
@@ -68,8 +70,8 @@ wl-showstatus extract
 tar xz --force-local -f $TARBALLDIR/$BASENAME/v$VERSION.tar.gz
 cd $BASENAME-$VERSION
 
-mkdir -p ext/glfw/src ext/nanobind
-touch ext/glfw/CMakeLists.txt ext/nanobind/CMakeLists.txt
+mkdir -p ext/glfw/src ext/nanobind ext/nativefiledialog-extended
+touch ext/glfw/CMakeLists.txt ext/nanobind/CMakeLists.txt ext/nativefiledialog-extended/CMakeLists.txt
 
 #grep -wi add_library $(find -name CMakeLists.txt -or -name '*.cmake')
 #mkdir -p build_test && cmake.exe -G"MSYS Makefiles" -DNANOGUI_BUILD_SHARED:BOOL=ON -DNANOGUI_BUILD_PYTHON:BOOL=OFF -DNANOGUI_BUILD_GLFW:BOOL=OFF -DNANOGUI_BUILD_GLAD:BOOL=OFF -DNANOGUI_BUILD_EXAMPLES:BOOL=OFF -DPython_EXECUTABLE:FILEPATH=$PYDIR/python.exe -S. -Bbuild_test -LH && echo OK; rm -rf build_test

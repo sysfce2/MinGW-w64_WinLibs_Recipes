@@ -33,10 +33,18 @@ wl-showstatus build &&
  CARGO_HOME=${CARGO_HOME:-$PWD/rustdeps} PATH=$MINGWPREFIX/share/rust/bin:$PATH \
  cargo build --profile release &&
  wl-showstatus install &&
- #CARGO_HOME=${CARGO_HOME:-$PWD/rustdeps} PATH=$MINGWPREFIX/share/rust/bin:$PATH \
- #cargo install --root $INSTALLPREFIX --profile release --path . &&
  CARGO_HOME=${CARGO_HOME:-$PWD/rustdeps} PATH=$MINGWPREFIX/share/rust/bin:$PATH \
- cargo install --root $INSTALLPREFIX --profile release --git=file://$PWD &&
+ cargo install --root $INSTALLPREFIX --profile release --path . &&
+ #CARGO_HOME=${CARGO_HOME:-$PWD/rustdeps} PATH=$MINGWPREFIX/share/rust/bin:$PATH \
+ #cargo install --root $INSTALLPREFIX --profile release --git=file://$PWD &&
+ #CARGO_HOME=${CARGO_HOME:-$PWD/rustdeps} PATH=$MINGWPREFIX/share/rust/bin:$PATH \
+ #cargo install --root $INSTALLPREFIX --profile release --path=crates/resvg &&
+ #touch SUCCESS &&
+ #for F in $(find crates -name '*.toml'); do
+ # CARGO_HOME=${CARGO_HOME:-$PWD/rustdeps} PATH=$MINGWPREFIX/share/rust/bin:$PATH \
+ # cargo install --root $INSTALLPREFIX --profile release --path=$(dirname $F) || ( rm -f SUCCESS; false ) || break
+ #done
+ #rm SUCCESS &&
  #--profile release 
     echo OK
 

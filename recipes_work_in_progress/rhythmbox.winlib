@@ -68,8 +68,10 @@ export TYPE=application
 #export VERSIONDATE=20241110
 #export VERSION=3.4.9
 #export VERSIONDATE=20251012
-export VERSION=3.5.0
-export VERSIONDATE=20260802
+#export VERSION=3.5.0
+#export VERSIONDATE=20260802
+export VERSION=3.5.1
+export VERSIONDATE=20260824
 ####No package 'tdb' found
 wl-showstatus --package-version
 export DEPENDENCIES=gnome-media,gstreamer,totem-pl-parser,dbus-glib,tdb,gobject-introspection
