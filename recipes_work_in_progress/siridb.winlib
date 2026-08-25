@@ -59,6 +59,61 @@ patch -ulbf src/siri/db/buffer.c << EOF
 +    rc = 0;  /* no posix_fadvise on apple or Windows */
  #else
 EOF
+# fix src/xpath/xpath.c (version >= 2.0.56)
+patch -ulbf src/xpath/xpath.c << EOF
+@@ -12,2 +12,5 @@
+ #include <xpath/xpath.h>
++#ifdef _WIN32
++#include <windows.h>
++#endif
+
+@@ -88,2 +91,11 @@
+
++#ifdef _WIN32
++    if (!GetModuleFileNameA(0, path, XPATH_MAX)) {
++        log_critical("Cannot read executable path");
++        return -1;
++    }
++
++    /* find last / in path */
++    path_end = strrchr(path, '\\\\');
++#else
+     if (readlink("/proc/self/exe", path, XPATH_MAX) == -1)
+@@ -96,2 +108,3 @@
+     path_end = strrchr(path, '/');
++#endif
+
+EOF
+# fix missing fsync in include/siri/db/buffer.h (version >= 2.0.56)
+patch -ulbf include/siri/db/buffer.h << EOF
+@@ -13,2 +13,5 @@
+ #include <stdbool.h>
++#ifdef _WIN32
++#define fsync(fd) _commit(fd)
++#endif
+
+EOF
+# fix missing strndup() (version >= 2.0.56)
+cat > strndup.h << EOF
+#ifdef _WIN32
+#include <malloc.h>
+#include <string.h>
+#define strndup MY_strndup
+inline char* strndup (const char* s, size_t n)
+{
+  char* result;
+  size_t len = strlen(s);
+  if (len > n)
+    len = n;
+  result = (char*)malloc(len + 1);
+  if (!result)
+    return 0;
+  result[len] = 0;
+  return (char*)memcpy(result, s, len);
+}
+#endif
+EOF
+sed -i.bak -e "1i #include \"../../../strndup.h\"" $(grep -lw strndup src/siri/*/*.c)
 wl-showstatus build &&
  make -CRelease CC="${CC:-gcc}" CFLAGS="-I$MINGWPREFIX/include/portable-uuid" &&
     echo OK
