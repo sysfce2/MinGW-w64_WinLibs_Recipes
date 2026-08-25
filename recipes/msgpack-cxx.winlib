@@ -28,8 +28,10 @@ export TYPE=library
 #export VERSIONDATE=20241102
 #export VERSION=7.0.1
 #export VERSIONDATE=20260609
-export VERSION=8.0.0
-export VERSIONDATE=20260530
+#export VERSION=8.0.0
+#export VERSIONDATE=20260530
+export VERSION=9.0.0
+export VERSIONDATE=20260825
 wl-showstatus --package-version
 export DEPENDENCIES=zlib,boost
 export OPTIONALDEPENDENCIES=

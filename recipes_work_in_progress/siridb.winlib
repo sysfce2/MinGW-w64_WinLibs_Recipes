@@ -15,8 +15,10 @@ export TYPE=library
 #export VERSIONDATE=20251022
 #export VERSION=2.0.54
 #export VERSIONDATE=20260413
-export VERSION=2.0.55
-export VERSIONDATE=20260727
+#export VERSION=2.0.55
+#export VERSIONDATE=20260727
+export VERSION=2.0.56
+export VERSIONDATE=20260825
 wl-showstatus --package-version
 export DEPENDENCIES=libcleri,libuuid
 export OPTIONALDEPENDENCIES=

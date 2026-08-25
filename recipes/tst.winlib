@@ -45,8 +45,10 @@ export TYPE=library
 #export VERSIONDATE=20250608
 #export VERSION=0.3.48
 #export VERSIONDATE=20250702
-export VERSION=0.3.49
-export VERSIONDATE=20250810
+#export VERSION=0.3.49
+#export VERSIONDATE=20250810
+export VERSION=0.3.50
+export VERSIONDATE=20260825
 wl-showstatus --package-version
 export DEPENDENCIES=clargs,nitki,opros,utki
 export OPTIONALDEPENDENCIES=

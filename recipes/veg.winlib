@@ -29,8 +29,10 @@ export TYPE=library
 #export VERSIONDATE=20250702
 #export VERSION=0.1.12
 #export VERSIONDATE=20250810
-export VERSION=0.1.13
-export VERSIONDATE=20251103
+#export VERSION=0.1.13
+#export VERSIONDATE=20251103
+export VERSION=0.1.14
+export VERSIONDATE=20260825
 wl-showstatus --package-version
 export DEPENDENCIES=rasterimage
 export OPTIONALDEPENDENCIES=
