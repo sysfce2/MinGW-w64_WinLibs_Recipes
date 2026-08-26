@@ -5,8 +5,10 @@ export BASENAME=fmod-bank-tools
 export DESCRIPTION="Extracts and Rebuilds Fmod .bank files."
 export CATEGORY=fileformat
 export TYPE=application
-export VERSION=2.2.4.29
-export VERSIONDATE=20260805
+#export VERSION=2.2.4.29
+#export VERSIONDATE=20260805
+export VERSION=2.2.4.32
+export VERSIONDATE=20260826
 wl-showstatus --package-version
 export DEPENDENCIES=qt6
 export OPTIONALDEPENDENCIES=

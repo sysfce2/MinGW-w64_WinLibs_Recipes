@@ -42,8 +42,10 @@ export BASENAME=gumbo-parser
 export DESCRIPTION="HTML parser library implemented in C99"
 export CATEGORY=dataprocessing
 export TYPE=library
-export VERSION=0.13.2
-export VERSIONDATE=20260214
+#export VERSION=0.13.2
+#export VERSIONDATE=20260214
+export VERSION=0.14.0
+export VERSIONDATE=20260826
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=

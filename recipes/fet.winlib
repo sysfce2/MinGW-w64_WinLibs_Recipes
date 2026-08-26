@@ -261,6 +261,8 @@ export TYPE=application
 #export VERSIONDATE=20260816
 export VERSION=7.10.1
 export VERSIONDATE=20260820
+#export VERSION=7.10.2
+#export VERSIONDATE=20260826
 wl-showstatus --package-version
 #export DEPENDENCIES=qt
 export DEPENDENCIES=qt6
