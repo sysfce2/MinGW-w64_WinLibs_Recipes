@@ -265,8 +265,10 @@ export TYPE=application
 #export VERSION=0.24.13
 #export VERSIONDATE=20260710
 ####src/win32/HResult.cxx:73:21: error: 'format' is not a member of 'fmt'
-export VERSION=0.24.14
-export VERSIONDATE=20260813
+#export VERSION=0.24.14
+#export VERSIONDATE=20260813
+export VERSION=0.24.15
+export VERSIONDATE=20260827
 wl-showstatus --package-version
 export DEPENDENCIES=boost,icu,libao,audiofile,flac,libcurl,expat,faad2,libid3tag,jack,libmad,libmodplug,lame,libogg,libvorbis,libopus,libsamplerate,libshout,libsndfile,sqlite3,twolame,libupnp,libyajl,zlib
 export OPTIONALDEPENDENCIES=fluidsynth

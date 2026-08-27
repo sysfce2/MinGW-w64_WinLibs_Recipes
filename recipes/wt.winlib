@@ -157,8 +157,10 @@ export TYPE=library
 #export VERSIONDATE=20260702
 #export VERSION=4.14.0
 #export VERSIONDATE=20260715
-export VERSION=4.14.1
-export VERSIONDATE=20260806
+#export VERSION=4.14.1
+#export VERSIONDATE=20260806
+export VERSION=4.14.2
+export VERSIONDATE=20260827
 wl-showstatus --package-version
 #export DEPENDENCIES=zlib,libpng,pthreads,openssl,sqlite3,postgresql,mariadb-client,libharu,boost
 export DEPENDENCIES=zlib,libpng,pthreads,openssl,sqlite3,postgresql,mariadb-client,ibpp,libharu,boost

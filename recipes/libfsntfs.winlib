@@ -77,8 +77,10 @@ export TYPE=library
 #export VERSIONDATE=20251019
 #export VERSION=experimental-20251028
 #export VERSIONDATE=20251029
-export VERSION=experimental-20260727
-export VERSIONDATE=20260727
+#export VERSION=experimental-20260727
+#export VERSIONDATE=20260727
+export VERSION=experimental-20260827
+export VERSIONDATE=20260827
 wl-showstatus --package-version
 export DEPENDENCIES=dokan,libuna,libbfio,libcdata,libcerror,libclocale,libcnotify,libcthreads,libfcache,libfdata,libfdatetime,libfguid,libfusn,libfwnt
 export OPTIONALDEPENDENCIES=
