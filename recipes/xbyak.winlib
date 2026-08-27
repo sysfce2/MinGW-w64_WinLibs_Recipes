@@ -169,8 +169,10 @@ export TYPE=library
 #export VERSIONDATE=20260814
 #export VERSION=7.40
 #export VERSIONDATE=20260815
-export VERSION=7.40.1
-export VERSIONDATE=20260825
+#export VERSION=7.40.1
+#export VERSIONDATE=20260825
+export VERSION=7.41
+export VERSIONDATE=20260827
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=

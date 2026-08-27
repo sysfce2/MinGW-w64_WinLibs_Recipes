@@ -443,10 +443,14 @@ export TYPE=library
 #export VERSIONDATE=20260716
 #export VERSION=3.12.4
 #export VERSIONDATE=20260820
+#export VERSION=3.12.5
+#export VERSIONDATE=20260827
 #export VERSION=3.13
 #export VERSIONDATE=20260718
-export VERSION=3.13.1
-export VERSIONDATE=20260820
+#export VERSION=3.13.1
+#export VERSIONDATE=20260820
+export VERSION=3.13.2
+export VERSIONDATE=20260827
 wl-showstatus --package-version
 export DEPENDENCIES=
 #export DEPENDENCIES=xmlrpc-c

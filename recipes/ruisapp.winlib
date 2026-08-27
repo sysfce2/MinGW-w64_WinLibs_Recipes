@@ -93,8 +93,10 @@ export TYPE=library
 #export VERSIONDATE=20260504
 #export VERSION=0.2.136
 #export VERSIONDATE=20260516
-export VERSION=0.2.137
-export VERSIONDATE=20260610
+#export VERSION=0.2.137
+#export VERSIONDATE=20260610
+export VERSION=0.2.138
+export VERSIONDATE=20260827
 wl-showstatus --package-version
 export DEPENDENCIES=ruis,ruis-render-opengl
 export OPTIONALDEPENDENCIES=
