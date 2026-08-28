@@ -77,8 +77,10 @@ export TYPE=library
 #export VERSIONDATE=20220211
 #export VERSION=0.4.4
 #export VERSIONDATE=20230317
-export VERSION=0.4.5
-export VERSIONDATE=20240831
+#export VERSION=0.4.5
+#export VERSIONDATE=20240831
+export VERSION=0.5.1
+export VERSIONDATE=20260828
 wl-showstatus --package-version
 export DEPENDENCIES=glib2,gettext,gtk3,libarchive,gobject-introspection,vala
 export OPTIONALDEPENDENCIES=
@@ -107,7 +109,8 @@ EOF
 mkdir -p build_both &&
  wl-showstatus configure &&
  #PKG_CONFIG= PYTHONPATH=${PYTHONPATH:+$PYTHONPATH:}$MINGWPREFIX/lib $PYDIR/python.exe $(which meson.py) setup --prefix $INSTALLPREFIX --backend ninja --buildtype release --strip --default-library both -Dgtk=true -Dintrospection=enabled -Dvapi=true -Dtests=false $PWD build_both &&
- PYTHONPATH=${PYTHONPATH:+$PYTHONPATH:}$MINGWPREFIX/lib $PYDIR/python.exe $(which meson.py) setup --prefix $INSTALLPREFIX --backend ninja --buildtype release --strip --default-library both -Dgtk=true -Dintrospection=enabled -Dvapi=true -Dtests=false $PWD build_both &&
+ #PYTHONPATH=${PYTHONPATH:+$PYTHONPATH:}$MINGWPREFIX/lib $PYDIR/python.exe $(which meson.py) setup --prefix $INSTALLPREFIX --backend ninja --buildtype release --strip --default-library both -Dgtk=true -Dintrospection=enabled -Dvapi=true -Dtests=false $PWD build_both &&
+ PYTHONPATH=${PYTHONPATH:+$PYTHONPATH:}$MINGWPREFIX/lib $PYDIR/python.exe $(which meson.py) setup --prefix $INSTALLPREFIX --backend ninja --buildtype release --strip --default-library both -Dintrospection=enabled -Dvapi=true -Ddocs=false -Dtests=false $PWD build_both &&
  wl-showstatus build-install &&
  #PKG_CONFIG= PATH=$PATH:$PYDIR PYTHONPATH=${PYTHONPATH:+$PYTHONPATH:}$MINGWPREFIX/lib ninja -Cbuild_both install &&
  PATH=$PATH:$PYDIR PYTHONPATH=${PYTHONPATH:+$PYTHONPATH:}$MINGWPREFIX/lib ninja -Cbuild_both install &&

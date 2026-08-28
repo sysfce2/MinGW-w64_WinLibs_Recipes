@@ -1769,8 +1769,10 @@ export TYPE=library
 #export VERSIONDATE=20260825
 #export VERSION=1.11.878
 #export VERSIONDATE=20260826
-export VERSION=1.11.879
-export VERSIONDATE=20260827
+#export VERSION=1.11.879
+#export VERSIONDATE=20260827
+export VERSION=1.11.880
+export VERSIONDATE=20260828
 ####generated/src/aws-cpp-sdk-acm-pca/include/aws/acm-pca/model/ValidityPeriodType.h:20:5: error: expected identifier before numeric constant
 wl-showstatus --package-version
 export DEPENDENCIES=aws-c-common,aws-c-sdkutils,aws-crt-cpp,aws-checksums,openssl

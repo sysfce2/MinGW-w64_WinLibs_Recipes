@@ -1,0 +1,40 @@
+export NAME="Git Large File Storage"
+export STATUS=
+export URL=https://git-lfs.com/
+export BASENAME=git-lfs
+export DESCRIPTION="Git Large File Storage (LFS) replaces large files such as audio samples, videos, datasets, and graphics with text pointers inside Git, while storing the file contents on a remote server like GitHub.com or GitHub Enterprise."
+export CATEGORY=
+export TYPE=library
+#export VERSION=3.7.0
+#export VERSIONDATE=20250830
+#export VERSION=3.7.1
+#export VERSIONDATE=20251017
+export VERSION=3.8.0
+export VERSIONDATE=20260828
+wl-showstatus --package-version
+export DEPENDENCIES=
+export OPTIONALDEPENDENCIES=
+export BUILDDEPENDENCIES=go,goversioninfo
+export OPTIONALBUILDDEPENDENCIES=
+export LICENSEFILE=LICENSE.md
+export LICENSETYPE=MIT
+export DOWNLOADURL="https://github.com/git-lfs/git-lfs/releases"
+export INSTALLPREFIX=`pwd`/inst_$BASENAME-$VERSION
+export DOWNLOADSOURCEURL=https://github.com/git-lfs/git-lfs/releases/download/v$VERSION/git-lfs-v$VERSION.tar.gz
+wl-showstatus download
+wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
+wl-wait4deps
+wl-showstatus extract
+tar xz --force-local -f $TARBALLDIR/$BASENAME/git-lfs-v$VERSION.tar.gz
+cd $BASENAME-$VERSION
+wl-showstatus build &&
+ #GOOS=windows GOARCH=amd64 
+ make GO=$MINGWPREFIX/go/bin/go.exe &&
+ strip bin/*.exe &&
+ wl-showstatus install &&
+ mkdir -p $INSTALLPREFIX/bin &&
+ cp -f bin/*.exe $INSTALLPREFIX/bin/ &&
+ wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
+
+
+

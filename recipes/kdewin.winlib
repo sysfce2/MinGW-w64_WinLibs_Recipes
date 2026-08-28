@@ -18,8 +18,10 @@ export TYPE=library
 #export VERSIONDATE=20190504
 #export VERSION=0.6.5
 #export VERSIONDATE=20210706
-export VERSION=0.6.6
-export VERSIONDATE=20210709
+#export VERSION=0.6.6
+#export VERSIONDATE=20210709
+export VERSION=0.6.7
+export VERSIONDATE=20260828
 wl-showstatus --package-version
 export DEPENDENCIES=zlib,libpng,qt
 export OPTIONALDEPENDENCIES=
