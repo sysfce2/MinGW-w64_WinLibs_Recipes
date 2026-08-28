@@ -41,8 +41,10 @@ export TYPE=library
 #export VERSIONDATE=20211031
 #export VERSION=14.2.5
 #export VERSIONDATE=20240327
-export VERSION=14.2.7
-export VERSIONDATE=20240415
+#export VERSION=14.2.7
+#export VERSIONDATE=20240415
+export VERSION=14.2.8
+export VERSIONDATE=20260828
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=
@@ -54,12 +56,14 @@ export LICENSEFILE=LICENSE
 export LICENSETYPE=MIT
 export DOWNLOADURL="https://github.com/DaanDeMeyer/reproc/releases"
 export INSTALLPREFIX=`pwd`/inst_$BASENAME-$VERSION
-export DOWNLOADSOURCEURL=https://github.com/DaanDeMeyer/reproc/archive/v$VERSION.tar.gz
+#export DOWNLOADSOURCEURL=https://github.com/DaanDeMeyer/reproc/archive/v$VERSION.tar.gz
+export DOWNLOADSOURCEURL=https://github.com/daandemeyer/reproc/archive/refs/tags/$VERSION.tar.gz
 wl-showstatus download
 wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
 wl-wait4deps
 wl-showstatus extract
-tar xz --force-local -f $TARBALLDIR/$BASENAME/v$VERSION.tar.gz
+#tar xz --force-local -f $TARBALLDIR/$BASENAME/v$VERSION.tar.gz
+tar xz --force-local -f $TARBALLDIR/$BASENAME/$VERSION.tar.gz
 cd $BASENAME-$VERSION
 #mkdir -p build_static build_shared &&
 # wl-showstatus configure &&

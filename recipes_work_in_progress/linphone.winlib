@@ -317,8 +317,10 @@ export TYPE=application
 #export VERSIONDATE=20251205
 #export VERSION=6.2.0
 #export VERSIONDATE=20260715
-export VERSION=6.2.1
-export VERSIONDATE=20260820
+#export VERSION=6.2.1
+#export VERSIONDATE=20260820
+export VERSION=6.2.2
+export VERSIONDATE=20260828
 wl-showstatus --package-version
 export DEPENDENCIES=bctoolbox,libortp,mediastreamer2,belcard,liblinphone,qt
 export OPTIONALDEPENDENCIES=

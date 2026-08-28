@@ -128,8 +128,10 @@ export TYPE=library
 #export VERSIONDATE=20240109
 #export VERSION=2.3.9
 #export VERSIONDATE=20240624
-export VERSION=2.3.10
-export VERSIONDATE=20250309
+#export VERSION=2.3.10
+#export VERSIONDATE=20250309
+export VERSION=2.3.12
+export VERSIONDATE=20260828
 ####/qt6/include/QtCore/qobjectdefs_impl.h:320:64: error: static assertion failed: Signal and slot arguments are not compatible (narrowing)
 wl-showstatus --package-version
 export DEPENDENCIES=qt,qt6,libgcrypt,cyrus-sasl
