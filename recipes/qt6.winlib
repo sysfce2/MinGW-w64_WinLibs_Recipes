@@ -332,10 +332,13 @@ export TYPE=library,application
 #export VERSIONDATE=20260402
 #export VERSION=6.11.0
 #export VERSIONDATE=20260321
-export VERSION=6.11.1
-export VERSIONDATE=20260512
+#export VERSION=6.11.1
+#export VERSIONDATE=20260512
+export VERSION=6.11.2
+export VERSIONDATE=20260818
 wl-showstatus --package-version
 export DEPENDENCIES=sqlite3,mariadb-client,postgresql,freetds,firebird,zlib,zstd,brotli,libpng,libjpeg,libtiff,libmng,libwebp,openssl,pcre2,glib2,icu,dbus,jasper,freetype2,harfbuzz,assimp,doubleconversion,xmlstar,libb2,gstreamer,gst-plugins-base,egl,abseil,protobuf,md4c,hunspell,ffmpeg5
+#litehtml
 export OPTIONALDEPENDENCIES=grpc,libproxy,xcb,open62541,tslib,libva,qtquicktimeline
 export BUILDDEPENDENCIES=cmake,ninja
 export OPTIONALBUILDDEPENDENCIES=
@@ -694,6 +697,7 @@ mkdir -p build_static build_shared &&
   -DQT_USE_BUNDLED_BundledHarfbuzz:BOOL=OFF \
   -DQT_USE_BUNDLED_BundledLibpng:BOOL=OFF \
   -DQT_USE_BUNDLED_BundledPcre2:BOOL=OFF \
+  -DQLITEHTML_USE_SYSTEM_LITEHTML:BOOL=OFF \
   -DFEATURE_qtplugininfo:BOOL=OFF \
   -DFEATURE_quickcontrols2_universal:BOOL=OFF \
   -DBUILD_qtdoc:BOOL=OFF \
@@ -719,10 +723,10 @@ mkdir -p build_static build_shared &&
   -DQT_QML_PYTHON_PATH:FILEPATH=$PYDIR/python.exe \
   -DLLVM_DIR:PATH=NOTFOUND \
   -DClang_DIR:PATH=NOTFOUND \
-  -DCMAKE_C_COMPILER:FILEPATH="${CC%% *}" \
-  -DCMAKE_C_FLAGS:STRING="${CC#* }" \
-  -DCMAKE_CXX_COMPILER:FILEPATH="${CXX%% *}" \
-  -DCMAKE_CXX_FLAGS:STRING="${CXX#* } -I$(cygpath -m $PWD/qtmultimedia/src/multimedia/windows)" \
+  -DCMAKE_C_COMPILER:FILEPATH="$(echo ${CC:-gcc}|sed "s/ .*$//")" \
+  -DCMAKE_C_FLAGS:STRING="$(echo ${CC:-gcc}|sed "s/^[^ ]*//")" \
+  -DCMAKE_CXX_COMPILER:FILEPATH="$(echo ${CXX:-g++}|sed "s/ .*$//")" \
+  -DCMAKE_CXX_FLAGS:STRING="$(echo ${CXX:-g++}|sed "s/^[^ ]*//") -I$(cygpath -m $PWD/qtmultimedia/src/multimedia/windows) -I$(cygpath -m $PWD/qttools/src/assistant/qlitehtml/src/3rdparty/litehtml/include)" \
   -S. -Bbuild_static &&
  #-DFEATURE_qt3d_system_assimp:BOOL=ON
  #-Dassimp_DIR:PATH=$(ls -1d $MINGWPREFIX/lib/cmake/assimp-*|sort -V|tail -n1) 
@@ -732,6 +736,7 @@ mkdir -p build_static build_shared &&
  #-DFEATURE_dbus:BOOL=OFF -DFEATURE_qdbus:BOOL=OFF 
  #-DBUILD_qtactiveqt:BOOL=OFF 
  #-DFEATURE_ffmpeg:BOOL=OFF 
+ #-DQLITEHTML_USE_SYSTEM_LITEHTML:BOOL=ON 
  # fix missing libdbus and error: undefined reference to ucol_close_67
  sed -i.bak -e "s/^\s*LINK_LIBRARIES\s*=.*$/& -Wl,--as-needed -licuin/; s/ \([^ ]*\)-NOTFOUND / -l\1/" build_static/build.ninja &&
  # fix use of wrong mysql library (version >= 6.1.0)
@@ -792,6 +797,7 @@ mkdir -p build_static build_shared &&
   -DQT_USE_BUNDLED_BundledHarfbuzz:BOOL=OFF \
   -DQT_USE_BUNDLED_BundledLibpng:BOOL=OFF \
   -DQT_USE_BUNDLED_BundledPcre2:BOOL=OFF \
+  -DQLITEHTML_USE_SYSTEM_LITEHTML:BOOL=OFF \
   -DFEATURE_qtplugininfo:BOOL=OFF \
   -DFEATURE_quickcontrols2_universal:BOOL=OFF \
   -DBUILD_qtdoc:BOOL=OFF \
@@ -817,10 +823,10 @@ mkdir -p build_static build_shared &&
   -DQT_QML_PYTHON_PATH:FILEPATH=$PYDIR/python.exe \
   -DLLVM_DIR:PATH=NOTFOUND \
   -DClang_DIR:PATH=NOTFOUND \
-  -DCMAKE_C_COMPILER:FILEPATH="${CC%% *}" \
-  -DCMAKE_C_FLAGS:STRING="${CC#* }" \
-  -DCMAKE_CXX_COMPILER:FILEPATH="${CXX%% *}" \
-  -DCMAKE_CXX_FLAGS:STRING="${CXX#* } -I$(cygpath -m $PWD/qtmultimedia/src/multimedia/windows)" \
+  -DCMAKE_C_COMPILER:FILEPATH="$(echo ${CC:-gcc}|sed "s/ .*$//")" \
+  -DCMAKE_C_FLAGS:STRING="$(echo ${CC:-gcc}|sed "s/^[^ ]*//")" \
+  -DCMAKE_CXX_COMPILER:FILEPATH="$(echo ${CXX:-g++}|sed "s/ .*$//")" \
+  -DCMAKE_CXX_FLAGS:STRING="$(echo ${CXX:-g++}|sed "s/^[^ ]*//") -I$(cygpath -m $PWD/qtmultimedia/src/multimedia/windows) -I$(cygpath -m $PWD/qttools/src/assistant/qlitehtml/src/3rdparty/litehtml/include)" \
   -S. -Bbuild_shared &&
  #-Wno-error=template-body
  #-DFEATURE_qtprotobufgen:BOOL=OFF 
