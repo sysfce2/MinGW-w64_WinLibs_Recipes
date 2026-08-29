@@ -44,8 +44,10 @@ export BASENAME=systeminformer
 export DESCRIPTION="A free, powerful, multi-purpose tool that helps you monitor system resources, debug software and detect malware."
 export CATEGORY=
 export TYPE=library
-export VERSION=3.2.25011.2103
-export VERSIONDATE=20250515
+#export VERSION=3.2.25011.2103
+#export VERSIONDATE=20250515
+export VERSION=4.0.26241.138
+export VERSIONDATE=20260829
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=

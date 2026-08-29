@@ -696,6 +696,8 @@ export DEPENDENCIES=gtk2,orbit2,libbonobo,gconf,libglade,libxml2,libsoup-2.4,lib
 #export VERSIONDATE=20260626
 #export VERSION=3.61.2
 #export VERSIONDATE=20260731
+#export VERSION=3.61.3
+#export VERSIONDATE=20260829
 ####No package 'gweather-3.0' found
 ####Cannot find glib-compile-schemas, which is required to build
 wl-showstatus --package-version

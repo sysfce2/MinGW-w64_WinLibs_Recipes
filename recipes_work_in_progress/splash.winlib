@@ -1,0 +1,34 @@
+export NAME="SPLASH"
+export STATUS=
+export URL=https://users.monash.edu.au/~dprice/splash/
+export BASENAME=splash
+export DESCRIPTION="SPLASH is a free and open source visualisation tool for Smoothed Particle Hydrodynamics (SPH) simulations in one, two and three dimensions, developed mainly for astrophysics. It uses a command-line menu but data can be manipulated interactively in the plotting window."
+export CATEGORY=science
+export TYPE=application
+export VERSION=3.12.0
+export VERSIONDATE=20260829
+wl-showstatus --package-version
+export DEPENDENCIES=giza
+export OPTIONALDEPENDENCIES=
+export BUILDDEPENDENCIES=
+export OPTIONALBUILDDEPENDENCIES=
+export LICENSEFILE=LICENSE
+export LICENSETYPE=GPL
+export DOWNLOADURL="https://github.com/danieljprice/splash/releases"
+export INSTALLPREFIX=$PWD/inst_$BASENAME-$VERSION
+export DOWNLOADSOURCEURL=https://github.com/danieljprice/splash/releases/download/v$VERSION/splash-v$VERSION.tar.gz
+wl-showstatus download
+wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
+wl-wait4deps
+wl-showstatus extract
+mkdir -p $BASENAME-$VERSION
+tar xz --force-local -f $TARBALLDIR/$BASENAME/splash-v$VERSION.tar.gz -C$BASENAME-$VERSION
+cd $BASENAME-$VERSION/splash
+mkdir -p $INSTALLPREFIX/include
+wl-showstatus build &&
+ mingw32-make PREFIX=$MINGWPREFIX CC="${CC:-gcc}" CXX="${CXX:-g++}" FC="${FC:-gfortran}" &&
+    echo OK
+# wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd ../.. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
+
+
+
