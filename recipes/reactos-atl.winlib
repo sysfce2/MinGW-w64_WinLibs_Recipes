@@ -7,8 +7,10 @@ export CATEGORY=development
 export TYPE=library
 #export VERSION=0.4.14
 #export VERSIONDATE=20220401
-export VERSION=0.4.15
-export VERSIONDATE=20250322
+#export VERSION=0.4.15
+#export VERSIONDATE=20250322
+export VERSION=0.4.16
+export VERSIONDATE=20260829
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=
