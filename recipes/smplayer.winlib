@@ -10,8 +10,10 @@ export TYPE=library
 #export VERSIONDATE=20240407
 #export VERSION=24.5.0
 #export VERSIONDATE=20240513
-export VERSION=25.6.0
-export VERSIONDATE=20250608
+#export VERSION=25.6.0
+#export VERSIONDATE=20250608
+export VERSION=26.8.29
+export VERSIONDATE=20260830
 wl-showstatus --package-version
 export DEPENDENCIES=qt
 export OPTIONALDEPENDENCIES=
@@ -39,7 +41,8 @@ patch -ulbf Makefile << EOF
         -install -d \$(DESTDIR)\$(DATA_PATH)
 EOF
 wl-showstatus build &&
- PATH=$PATH:$MINGWPREFIX/qt/bin QTDIR=$MINGWPREFIX/qt QMAKESPEC=$MINGWPREFIX/qt/mkspecs/win32-g++ make install PREFIX=$INSTALLPREFIX/share/smplayer &&
+ #PATH=$PATH:$MINGWPREFIX/qt/bin QTDIR=$MINGWPREFIX/qt QMAKESPEC=$MINGWPREFIX/qt/mkspecs/win32-g++ make install PREFIX=$INSTALLPREFIX/share/smplayer &&
+ PATH=$PATH:$MINGWPREFIX/qt/bin QTDIR=$MINGWPREFIX/qt QMAKESPEC=$MINGWPREFIX/qt/mkspecs/win32-g++ make install PREFIX=$INSTALLPREFIX/share/smplayer CFLAGS_EXTRA="$(if ${CC:-gcc} --help -v 2>/dev/null|grep -q "\-Wunused-but-set-variable" || ${CC:-gcc} --version|grep -q "^clang"; then echo "-Wno-error=unused-but-set-variable"; fi)" &&
  wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
 ####PATH=$PATH:$MINGWPREFIX/qt/bin $MINGWPREFIX/share/smplayer/bin/smplayer.exe
 

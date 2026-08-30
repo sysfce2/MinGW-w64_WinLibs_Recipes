@@ -199,10 +199,10 @@ export TYPE=application
 #export VERSIONDATE=20250331
 #export VERSION=2.112.0
 #export VERSIONDATE=20260107
-export VERSION=2.112.1
-export VERSIONDATE=20260111
-#export VERSION=2.113.0
-#export VERSIONDATE=20260818
+#export VERSION=2.112.1
+#export VERSIONDATE=20260111
+export VERSION=2.113.0
+export VERSIONDATE=20260818
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=
@@ -217,7 +217,8 @@ export LICENSETYPE=BSL
 export DOWNLOADURL="https://github.com/dlang/dmd/tags"
 export INSTALLPREFIX=`pwd`/inst_$BASENAME-$VERSION
 #export DOWNLOADSOURCEURL="https://github.com/dlang/dmd/archive/v$VERSION.tar.gz http://downloads.dlang.org/releases/$(echo $VERSION|sed -e "s/^\([0-9]*\)\..*$/\1/").x/$VERSION/dmd.$VERSION.windows.zip"
-export DOWNLOADSOURCEURL="https://github.com/dlang/dmd/archive/refs/tags/v$VERSION.tar.gz http://downloads.dlang.org/releases/$(echo $VERSION|sed -e "s/^\([0-9]*\)\..*$/\1/").x/$VERSION/dmd.$VERSION.windows.zip"
+#export DOWNLOADSOURCEURL="https://github.com/dlang/dmd/archive/refs/tags/v$VERSION.tar.gz http://downloads.dlang.org/releases/$(echo $VERSION|sed -e "s/^\([0-9]*\)\..*$/\1/").x/$VERSION/dmd.$VERSION.windows.zip"
+export DOWNLOADSOURCEURL="https://github.com/dlang/dmd/archive/refs/tags/v$VERSION.tar.gz https://downloads.dlang.org/releases/2026/dmd.$VERSION.windows.7z"
 wl-showstatus download
 wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
 wl-wait4deps
@@ -225,8 +226,9 @@ wl-showstatus extract
 tar xz --force-local -f $TARBALLDIR/$BASENAME/v$VERSION.tar.gz
 cd $BASENAME-$VERSION
 # use prebuilt binary to avoid bootstrap
-unzip -oq $TARBALLDIR/$BASENAME/dmd.$VERSION.windows.zip -dprebuilt
-mv -f prebuilt/dmd.$VERSION.windows/dmd2 prebuilt/
+#unzip -oq $TARBALLDIR/$BASENAME/dmd.$VERSION.windows.zip -dprebuilt
+#mv -f prebuilt/dmd.$VERSION.windows/dmd2 prebuilt/
+'C:\Program Files\7-Zip\7z.exe' x $TARBALLDIR/$BASENAME/dmd.$VERSION.windows.7z -oprebuilt
 # fix compiler/src/dmd/link.d (version >= 2.105.2)
 patch -ulbf compiler/src/dmd/link.d << EOF
 @@ -239,3 +239,3 @@

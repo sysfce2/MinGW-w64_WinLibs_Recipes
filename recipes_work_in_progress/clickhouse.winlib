@@ -943,8 +943,10 @@ export TYPE=library
 #export VERSIONDATE=20260827
 #export VERSION=26.3.24.4-lts
 #export VERSIONDATE=20260828
-export VERSION=26.3.25.2-lts
-export VERSIONDATE=20260829
+#export VERSION=26.3.25.2-lts
+#export VERSIONDATE=20260829
+export VERSION=26.3.26.3-lts
+export VERSIONDATE=20260830
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=

@@ -33,8 +33,10 @@ export TYPE=library
 #export VERSIONDATE=20260525
 #export VERSION=2.58.2
 #export VERSIONDATE=20260615
-export VERSION=2.58.3
-export VERSIONDATE=20260720
+#export VERSION=2.58.3
+#export VERSIONDATE=20260720
+export VERSION=2.58.4
+export VERSIONDATE=20260830
 wl-showstatus --package-version
 export DEPENDENCIES=glfw3,nlohmann-json,re2,liblz4
 export OPTIONALDEPENDENCIES=
