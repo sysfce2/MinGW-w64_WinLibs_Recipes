@@ -1,6 +1,7 @@
 export NAME="virt-what"
 export STATUS=
-export URL=https://people.redhat.com/~rjones/virt-what/
+export URL=https://www.virt-what.com/
+#export URL=https://people.redhat.com/~rjones/virt-what/
 export BASENAME=virt-what
 export DESCRIPTION="virt-what is a shell script which can be used to detect if the program is running in a virtual machine."
 export CATEGORY=hardware
@@ -33,9 +34,12 @@ export BUILDDEPENDENCIES=
 export OPTIONALBUILDDEPENDENCIES=
 export LICENSEFILE=COPYING
 export LICENSETYPE=GPL
-export DOWNLOADURL="https://people.redhat.com/~rjones/virt-what/files/"
+#export DOWNLOADURL="https://github.com/pexip/os-virt-what/tags"
+#export DOWNLOADURL="https://people.redhat.com/~rjones/virt-what/files/"
+export DOWNLOADURL="https://mirror.liquidtelecom.com/openvox/artifacts/components/"
 export INSTALLPREFIX=`pwd`/inst_$BASENAME-$VERSION
-export DOWNLOADSOURCEURL=https://people.redhat.com/~rjones/virt-what/files/$BASENAME-$VERSION.tar.gz
+#export DOWNLOADSOURCEURL=https://people.redhat.com/~rjones/virt-what/files/$BASENAME-$VERSION.tar.gz
+export DOWNLOADSOURCEURL=https://mirror.liquidtelecom.com/openvox/artifacts/components/$BASENAME-$VERSION.tar.gz
 wl-showstatus download
 wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
 wl-wait4deps

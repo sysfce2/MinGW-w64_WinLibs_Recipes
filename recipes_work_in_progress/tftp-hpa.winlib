@@ -12,8 +12,10 @@ export TYPE=application
 #export VERSIONDATE=20231223
 #export VERSION=5.3
 #export VERSIONDATE=20251111
-export VERSION=5.4
-export VERSIONDATE=20260705
+#export VERSION=5.4
+#export VERSIONDATE=20260705
+export VERSION=6.0
+export VERSIONDATE=20260830
 ####configure: error: getaddrinfo but not gai_strerror found
 wl-showstatus --package-version
 export DEPENDENCIES=readline

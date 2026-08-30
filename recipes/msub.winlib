@@ -1,0 +1,52 @@
+export NAME="msub"
+export STATUS=
+export URL=https://sourceforge.net/projects/msub/
+export BASENAME=msub
+export DESCRIPTION="msub - a Handy tool to read file(s) and perform substitutions using values of variables defined in makefile."
+export CATEGORY=development
+export TYPE=application
+export VERSION=1.14b1
+export VERSIONDATE=20260830
+wl-showstatus --package-version
+export DEPENDENCIES=
+export OPTIONALDEPENDENCIES=
+export BUILDDEPENDENCIES=
+export OPTIONALBUILDDEPENDENCIES=
+export LICENSEFILE=msub.c
+export LICENSETYPE=BSD
+export DOWNLOADURL="https://sourceforge.net/projects/msub/files/msub-src/"
+export INSTALLPREFIX=$PWD/inst_$BASENAME-$VERSION
+export DOWNLOADSOURCEURL=https://downloads.sourceforge.net/project/msub/msub-src/$VERSION/msub.c
+wl-showstatus download
+wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
+mv -f $TARBALLDIR/$BASENAME/msub.c $TARBALLDIR/$BASENAME/msub.c.$VERSION
+wl-wait4deps
+wl-showstatus extract
+mkdir -p $BASENAME-$VERSION
+cp -f $TARBALLDIR/$BASENAME/msub.c.$VERSION $BASENAME-$VERSION/msub.c
+cd $BASENAME-$VERSION
+# fix msub.c (version >= 1.14b1)
+patch -ulbf msub.c << EOF
+@@ -81,2 +81,3 @@
+ # endif
++# include      <stdlib.h>
+ # include      <string.h>
+@@ -94,2 +95,3 @@
+ //V1.15 fixed for HP-UX compilation
++#ifndef WIN32
+ extern char    *malloc (size_t size);
+@@ -99,2 +101,3 @@
+ extern char    *getenv (const char* name);
++#endif
+
+EOF
+wl-showstatus build &&
+ ${CC:-gcc} -c msub.o msub.c -std=c11 -O3 -DWIN32 &&
+ ${CC:-gcc} -o msub.exe msub.o -mconsole -s &&
+ wl-showstatus install &&
+ mkdir -p $INSTALLPREFIX/bin &&
+ cp -f msub.exe $INSTALLPREFIX/bin/ &&
+ wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
+
+
+
