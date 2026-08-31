@@ -265,8 +265,10 @@ export CATEGORY=metadata
 export TYPE=library
 #export VERSION=0.28.7
 #export VERSIONDATE=20250831
-export VERSION=0.28.8
-export VERSIONDATE=20260301
+#export VERSION=0.28.8
+#export VERSIONDATE=20260301
+export VERSION=0.28.9
+export VERSIONDATE=20260831
 wl-showstatus --package-version
 export DEPENDENCIES=pthreads,libiconv,gettext,inih,zlib,brotli,libcurl,expat
 export OPTIONALDEPENDENCIES=

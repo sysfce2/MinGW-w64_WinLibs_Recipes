@@ -5,8 +5,10 @@ export BASENAME=splash
 export DESCRIPTION="SPLASH is a free and open source visualisation tool for Smoothed Particle Hydrodynamics (SPH) simulations in one, two and three dimensions, developed mainly for astrophysics. It uses a command-line menu but data can be manipulated interactively in the plotting window."
 export CATEGORY=science
 export TYPE=application
-export VERSION=3.12.0
-export VERSIONDATE=20260829
+#export VERSION=3.12.0
+#export VERSIONDATE=20260829
+export VERSION=4.0.0
+export VERSIONDATE=20260831
 wl-showstatus --package-version
 export DEPENDENCIES=giza
 export OPTIONALDEPENDENCIES=
@@ -25,10 +27,22 @@ mkdir -p $BASENAME-$VERSION
 tar xz --force-local -f $TARBALLDIR/$BASENAME/splash-v$VERSION.tar.gz -C$BASENAME-$VERSION
 cd $BASENAME-$VERSION/splash
 mkdir -p $INSTALLPREFIX/include
+# don't use missing setenv in src/system_utils.f90 (version >= 4.0.0)
+patch -ulbf src/system_utils.f90 << EOF
+@@ -73,3 +73,3 @@
+
+- ierr = setenv(cstring(variable),cstring(string),1)
++ ierr = -1
+  if (present(stat)) stat = ierr
+EOF
 wl-showstatus build &&
  mingw32-make PREFIX=$MINGWPREFIX CC="${CC:-gcc}" CXX="${CXX:-g++}" FC="${FC:-gfortran}" &&
-    echo OK
-# wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd ../.. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
+ strip bin/*.exe &&
+ wl-showstatus install &&
+ mkdir -p $INSTALLPREFIX/bin
+ mingw32-make install PREFIX=$INSTALLPREFIX &&
+ wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd ../.. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
+####$MINGWPREFIX/bin/splash.exe --help
 
 
 
