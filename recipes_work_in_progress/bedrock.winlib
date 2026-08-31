@@ -1240,8 +1240,10 @@ export TYPE=library
 #export VERSIONDATE=20260825
 #export VERSION=2026-08-26
 #export VERSIONDATE=20260826
-export VERSION=2026-08-28
-export VERSIONDATE=20260828
+#export VERSION=2026-08-28
+#export VERSIONDATE=20260828
+export VERSION=2026-08-31
+export VERSIONDATE=20260831
 ####libstuff/libstuff.h:5:10: fatal error: poll.h: No such file or directory
 wl-showstatus --package-version
 export DEPENDENCIES=libdl

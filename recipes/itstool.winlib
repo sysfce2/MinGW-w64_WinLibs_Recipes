@@ -38,9 +38,11 @@ export BUILDDEPENDENCIES=
 export OPTIONALBUILDDEPENDENCIES=
 export LICENSEFILE=COPYING.GPL3
 export LICENSETYPE=GPLv3
-export DOWNLOADURL="http://itstool.org/download/"
+#export DOWNLOADURL="http://itstool.org/download/"
+export DOWNLOADURL="https://itstool.org/download/"
 export INSTALLPREFIX=`pwd`/inst_$BASENAME-$VERSION
-export DOWNLOADSOURCEURL=http://files.itstool.org/itstool/$BASENAME-$VERSION.tar.bz2
+#export DOWNLOADSOURCEURL=http://files.itstool.org/itstool/$BASENAME-$VERSION.tar.bz2
+export DOWNLOADSOURCEURL=https://files.itstool.org/itstool/$BASENAME-$VERSION.tar.bz2
 wl-showstatus download
 wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
 wl-wait4deps
