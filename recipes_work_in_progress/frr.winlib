@@ -6,8 +6,10 @@ export BASENAME=frr
 export DESCRIPTION="FRR is free software that implements and manages various IPv4 and IPv6 routing protocols. It runs on nearly all distributions of Linux and BSD and supports all modern CPU architectures."
 export CATEGORY=communication
 export TYPE=library
-export VERSION=10.7.0
-export VERSIONDATE=20260828
+#export VERSION=10.7.0
+#export VERSIONDATE=20260828
+export VERSION=10.7.1
+export VERSIONDATE=20260901
 ####configure: error: PYTHON (D:\Prog\Python\WPy64-31450\python\python.exe) explicitly specified but development environment not working
 wl-showstatus --package-version
 export DEPENDENCIES=
@@ -57,7 +59,7 @@ wl-showstatus preconfigure &&
  #PYTHON=$PYDIR/python.exe C_INCLUDE_PATH=$C_INCLUDE_PATH:$PYDIR/include 
  #PKG_CONFIG_PATH=$MINGWPREFIX/libav/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH} 
  #./configure --prefix=$INSTALLPREFIX --build=$BUILDPLATFORM --host=$RUNPLATFORM --enable-static --enable-shared LDFLAGS="-Wl,-no-undefined -Wl,--as-needed" &&
- ./configure --prefix=$INSTALLPREFIX --build=$BUILDPLATFORM --host=$RUNPLATFORM PYTHON=$PYDIR/python.exe &&
+ PYTHONPATH=$MINGWPREFIX/python/Lib/site-packages${PYTHONPATH:+:$PYTHONPATH} ./configure --prefix=$INSTALLPREFIX --build=$BUILDPLATFORM --host=$RUNPLATFORM PYTHON=$PYDIR/python.exe &&
  ## fix building DLLs
  #sed -i.bak -e "s/\(allow_undefined=\)yes/\1no/" libtool &&
  ## fix detection of shared libraries
