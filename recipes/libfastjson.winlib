@@ -21,8 +21,10 @@ export TYPE=library
 #export VERSIONDATE=20171219
 #export VERSION=0.99.9
 #export VERSIONDATE=20210126
-export VERSION=1.2304.0
-export VERSIONDATE=20230418
+#export VERSION=1.2304.0
+#export VERSIONDATE=20230418
+export VERSION=1.2609.0
+export VERSIONDATE=20260902
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=
@@ -45,8 +47,6 @@ mv debug.c debug.c.bak &&
 sed -e "s/#if \(HAVE_V*SYSLOG\)/#ifdef \1/" debug.c.bak > debug.c
 # fix %zu in json_util.c (version >= 0.99.3)
 patch -ulbf json_util.c << EOF
---- json_util.c  2016-04-28 17:51:53.000000000 +0200
-+++ json_util.c  2016-07-11 19:00:48.976804000 +0200
 @@ -284,3 +284,3 @@
         {
 -               MC_ERROR("fjson_type_to_name: type %d is out of range [0,%zu]\n", o_type, NELEM(fjson_type_name));
@@ -55,8 +55,6 @@ patch -ulbf json_util.c << EOF
 EOF
 # fix missing _T_emptybuffer in printbuf.c (version >= 0.99.4)
 patch -ulbf printbuf.c << EOF
---- printbuf.c  2016-04-18 15:46:07 +0200
-+++ printbuf.c  2016-08-02 10:00:46 +0200
 @@ -167,3 +167,3 @@
            our buffer like on some 64bit sun systems.... but hey, its time to move on */
 -       chars = vsnprintf(&_T_emptybuffer, 0, fmt, ap)+1;

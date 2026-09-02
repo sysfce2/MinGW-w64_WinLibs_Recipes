@@ -30,8 +30,10 @@ export TYPE=library
 #export VERSIONDATE=20240508
 #export VERSION=4.8
 #export VERSIONDATE=20250410
-export VERSION=4.9
-export VERSIONDATE=20251212
+#export VERSION=4.9
+#export VERSIONDATE=20251212
+export VERSION=4.10
+export VERSIONDATE=20260902
 wl-showstatus --package-version
 export DEPENDENCIES=gnutls,mpfr,netcdf
 #lapack

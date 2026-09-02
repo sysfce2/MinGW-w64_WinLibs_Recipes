@@ -60,8 +60,10 @@ export TYPE=library
 #export VERSIONDATE=20230108
 #export VERSION=0.1.22
 #export VERSIONDATE=20240305
-export VERSION=0.1.23
-export VERSIONDATE=20251127
+#export VERSION=0.1.23
+#export VERSIONDATE=20251127
+export VERSION=0.1.24
+export VERSIONDATE=20260902
 wl-showstatus --package-version
 export DEPENDENCIES=glib2,gettext,gstreamer,gnutls,gupnp-igd
 export OPTIONALDEPENDENCIES=
