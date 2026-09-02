@@ -31,8 +31,10 @@ export TYPE=library
 #export VERSIONDATE=20240305
 #export VERSION=20240507
 #export VERSIONDATE=20240507
-export VERSION=20251121
-export VERSIONDATE=20251122
+#export VERSION=20251121
+#export VERSIONDATE=20251122
+export VERSION=20260902
+export VERSIONDATE=20260902
 wl-showstatus --package-version
 export DEPENDENCIES=pthreads,zlib,libbz2,xz,libcerror,libcthreads,libcdata,libclocale,libcnotify,libcsplit,libuna,libcdirectory,libcfile,libcpath,libbfio,libfcache,libfdata,libfguid,libfvalue,libfplist,libhmac,libcaes,libfmos
 export OPTIONALDEPENDENCIES=

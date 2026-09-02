@@ -33,8 +33,10 @@ export TYPE=library
 #export VERSIONDATE=20231201
 #export VERSION=experimental-20240219
 #export VERSIONDATE=20240220
-export VERSION=experimental-20240505
-export VERSIONDATE=20240505
+#export VERSION=experimental-20240505
+#export VERSIONDATE=20240505
+export VERSION=experimental-20260902
+export VERSIONDATE=20260902
 wl-showstatus --package-version
 export DEPENDENCIES=libbfio,libcdata,libcerror,libcfile,libclocale,libcnotify
 export OPTIONALDEPENDENCIES=

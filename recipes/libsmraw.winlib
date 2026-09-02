@@ -31,8 +31,10 @@ export TYPE=library
 #export VERSIONDATE=20231127
 #export VERSION=alpha-20240310
 #export VERSIONDATE=20240310
-export VERSION=alpha-20240506
-export VERSIONDATE=20240506
+#export VERSION=alpha-20240506
+#export VERSIONDATE=20240506
+export VERSION=alpha-20260902
+export VERSIONDATE=20260902
 ####configure: error: Missing function: time
 wl-showstatus --package-version
 export DEPENDENCIES=libcdata,libcerror,libcthreads,libfdata,dokan
