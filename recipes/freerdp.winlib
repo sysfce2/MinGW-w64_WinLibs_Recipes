@@ -389,13 +389,13 @@ export TYPE=library,application
 #export VERSIONDATE=20260706
 #export VERSION=3.29.0
 #export VERSIONDATE=20260714
-export VERSION=3.30.0
-export VERSIONDATE=20260716
+#export VERSION=3.30.0
+#export VERSIONDATE=20260716
 #export VERSION=3.31.0
 #export VERSIONDATE=20260827
-#export VERSION=3.31.1
-#export VERSIONDATE=20260902
 ####undefined reference to `WLog_IsLevelActive'
+export VERSION=3.31.1
+export VERSIONDATE=20260902
 wl-showstatus --package-version
 #export DEPENDENCIES=openssl,pthreads,ffmpeg5,libx11,libxkbfile,libopus,json
 export DEPENDENCIES=openssl,pthreads,ffmpeg8,libx11,libxkbfile,libopus,json
@@ -535,6 +535,14 @@ patch -ulbf winpr/CMakeLists.txt << EOF
 -if (WIN32 AND NOT UWP)
 +if (MSVC AND NOT UWP)
         set(NATIVE_SSPI ON)
+EOF
+# fix server/Windows/cli/CMakeLists.txt (version >= 3.31.0)
+patch -ulbf server/Windows/cli/CMakeLists.txt << EOF
+@@ -27,3 +27,3 @@
+
+-set(\${MODULE_PREFIX}_LIBS wfreerdp-server)
++set(\${MODULE_PREFIX}_LIBS wfreerdp-server freerdp-server3 winpr3)
+
 EOF
 mkdir -p build_win &&
  wl-showstatus configure &&
