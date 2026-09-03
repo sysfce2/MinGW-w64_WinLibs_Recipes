@@ -476,6 +476,9 @@ export VERSIONDATE=20260813
 #export VERSIONDATE=20260611
 #export VERSION=4.7.2
 #export VERSIONDATE=20260716
+#export VERSION=4.7.3
+#export VERSIONDATE=20260903
+####rawshark.c:355:19: error: implicit declaration of function 'linktype_name_to_val' [-Wimplicit-function-declaration]
 wl-showstatus --package-version
 export DEPENDENCIES=qt6,libsmi,gnutls,zlib,brotli,snappy,zstd,liblz4,nghttp2,libsbc,spandsp,bcg729,ilbc,libopus,libxml2,libmaxminddb
 export OPTIONALDEPENDENCIES=
@@ -658,3 +661,4 @@ mkdir -p build_win &&
 # mv -f $F Wireshark/
 #done &&
 #echo SUCCESS
+ 
