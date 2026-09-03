@@ -79,8 +79,10 @@ export TYPE=library
 #export VERSIONDATE=20230317
 #export VERSION=0.4.5
 #export VERSIONDATE=20240831
-export VERSION=0.5.1
-export VERSIONDATE=20260828
+#export VERSION=0.5.1
+#export VERSIONDATE=20260828
+export VERSION=0.5.2
+export VERSIONDATE=20260903
 wl-showstatus --package-version
 export DEPENDENCIES=glib2,gettext,gtk3,libarchive,gobject-introspection,vala
 export OPTIONALDEPENDENCIES=

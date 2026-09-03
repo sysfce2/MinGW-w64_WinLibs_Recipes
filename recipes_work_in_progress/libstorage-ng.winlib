@@ -966,8 +966,10 @@ export TYPE=library
 #export VERSIONDATE=20260823
 #export VERSION=4.5.343
 #export VERSIONDATE=20260901
-export VERSION=4.5.345
-export VERSIONDATE=20260902
+#export VERSION=4.5.345
+#export VERSIONDATE=20260902
+export VERSION=4.5.346
+export VERSIONDATE=20260903
 ####storage/Utils/AppUtil.cc:34:10: fatal error: sys/statvfs.h: No such file or directory
 wl-showstatus --package-version
 export DEPENDENCIES=unixem,fnmatch-win32
