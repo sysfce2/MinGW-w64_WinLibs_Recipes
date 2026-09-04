@@ -182,12 +182,12 @@ export BASENAME=hdf
 export DESCRIPTION="HDF (also known as HDF4) is a library and multi-object file format for storing and managing data between machines."
 export CATEGORY=dataprocessing
 export TYPE=library
-export VERSION=4.3.0.2
-export VERSIONDATE=20250521
+#export VERSION=4.3.0.2
+#export VERSIONDATE=20250521
 #export VERSION=4.3.1
 #export VERSIONDATE=20250701
-#export VERSION=4.4.0
-#export VERSIONDATE=20260904
+export VERSION=4.4.0
+export VERSIONDATE=20260904
 wl-showstatus --package-version
 export DEPENDENCIES=libjpeg,portablexdr,zlib,libsz
 export OPTIONALDEPENDENCIES=
@@ -201,30 +201,66 @@ export DOWNLOADSOURCEURL=https://github.com/HDFGroup/hdf4/archive/refs/tags/$VER
 #export DOWNLOADSOURCEURL=https://github.com/HDFGroup/hdf4/archive/refs/tags/hdf$VERSION.tar.gz
 wl-showstatus download
 wl-download -v -d $TARBALLDIR/$BASENAME $DOWNLOADSOURCEURL
-tar xz --force-local -f $TARBALLDIR/$BASENAME/$VERSION.tar.gz
-cd hdf4-$VERSION
-#tar xz --force-local -f $TARBALLDIR/$BASENAME/hdf$VERSION.tar.gz
-#cd hdf4-hdf$VERSION
-# fix CMakeFilters.cmake (version >= 4.3.0.2)
+#tar xz --force-local -f $TARBALLDIR/$BASENAME/$VERSION.tar.gz
+#cd hdf4-$VERSION
+tar xz --force-local -f $TARBALLDIR/$BASENAME/hdf$VERSION.tar.gz
+cd hdf4-hdf$VERSION
+## fix CMakeFilters.cmake (version = 4.3.0.2)
+#patch -ulbf CMakeFilters.cmake << EOF
+#@@ -99,2 +99,5 @@
+#         set (LINK_COMP_LIBS \${LINK_COMP_LIBS} \${JPEG_STATIC_LIBRARY})
+#+      else ()
+#+        find_package(PkgConfig)
+#+        pkg_check_modules(JPEG REQUIRED libjpeg)
+#       endif ()
+#@@ -141,2 +144,5 @@
+#         set (LINK_COMP_LIBS \${LINK_COMP_LIBS} \${ZLIB_STATIC_LIBRARY})
+#+      else ()
+#+        find_package(PkgConfig)
+#+        pkg_check_modules(ZLIB REQUIRED zlib)
+#       endif ()
+#@@ -193,2 +199,5 @@
+#       set (LINK_COMP_LIBS \${LINK_COMP_LIBS} \${SZIP_STATIC_LIBRARY})
+#+    else ()
+#+      find_package(PkgConfig)
+#+      pkg_check_modules(SZIP REQUIRED libsz)
+#     endif ()
+#EOF
+# fix CMakeFilters.cmake (version >= 4.4.0)
 patch -ulbf CMakeFilters.cmake << EOF
-@@ -99,2 +99,5 @@
-         set (LINK_COMP_LIBS \${LINK_COMP_LIBS} \${JPEG_STATIC_LIBRARY})
-+      else ()
+@@ -129,2 +129,10 @@
+     else ()
++      if (NOT JPEG_FOUND)
++        message (WARNING "Fallback to pkg-config detection of libjpeg")
 +        find_package(PkgConfig)
 +        pkg_check_modules(JPEG REQUIRED libjpeg)
-       endif ()
-@@ -141,2 +144,5 @@
-         set (LINK_COMP_LIBS \${LINK_COMP_LIBS} \${ZLIB_STATIC_LIBRARY})
-+      else ()
++        if (JPEG_FOUND)
++          set(H4_JPEG_FOUND \${JPEG_FOUND})
++        endif ()
++      endif ()
+       if (HDF4_ALLOW_EXTERNAL_SUPPORT MATCHES "GIT" OR HDF4_ALLOW_EXTERNAL_SUPPORT MATCHES "TGZ")
+@@ -209,2 +217,10 @@
+     else ()
++      if (NOT ZLIB_FOUND)
++        message (WARNING "Fallback to pkg-config detection of zlib")
 +        find_package(PkgConfig)
 +        pkg_check_modules(ZLIB REQUIRED zlib)
-       endif ()
-@@ -193,2 +199,5 @@
-       set (LINK_COMP_LIBS \${LINK_COMP_LIBS} \${SZIP_STATIC_LIBRARY})
-+    else ()
-+      find_package(PkgConfig)
-+      pkg_check_modules(SZIP REQUIRED libsz)
-     endif ()
++        if (ZLIB_FOUND)
++          set(H4_ZLIB_FOUND \${JPEG_FOUND})
++        endif ()
++      endif ()
+       if (HDF4_ALLOW_EXTERNAL_SUPPORT MATCHES "GIT" OR HDF4_ALLOW_EXTERNAL_SUPPORT MATCHES "TGZ")
+@@ -267,2 +283,10 @@
+   else ()
++      if (NOT SZIP_FOUND)
++        message (WARNING "Fallback to pkg-config detection of szip")
++        find_package(PkgConfig)
++        pkg_check_modules(SZIP REQUIRED libsz)
++        if (SZIP_FOUND)
++          set(H4_SZIP_FOUND \${JPEG_FOUND})
++        endif ()
++      endif ()
+     if (HDF4_ALLOW_EXTERNAL_SUPPORT MATCHES "GIT" OR HDF4_ALLOW_EXTERNAL_SUPPORT MATCHES "TGZ")
 EOF
 mkdir -p build_win &&
  wl-showstatus configure &&
@@ -233,8 +269,8 @@ mkdir -p build_win &&
  sed -i.bak -e "s/^\s*LINK_LIBRARIES\s*=.*$/& -Wl,--as-needed -lz -lsz -ljpeg/" build_win/build.ninja &&
  wl-showstatus build-install &&
  ninja -Cbuild_win install/strip &&
- wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf hdf4-$VERSION
- #wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf hdf4-hdf$VERSION
+ #wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf hdf4-$VERSION
+ wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf hdf4-hdf$VERSION
 
 
 
