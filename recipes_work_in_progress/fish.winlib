@@ -137,7 +137,9 @@ export TYPE=application
 #export VERSIONDATE=20260624
 #export VERSION=4.8.1
 #export VERSIONDATE=20260714
-export VERSION=4.9.0
+#export VERSION=4.9.0
+#export VERSIONDATE=20260904
+export VERSION=4.9.1
 export VERSIONDATE=20260904
 ####crates/build-helper/src/lib.rs: failed to resolve: could not find `unix` in `os`
 wl-showstatus --package-version
