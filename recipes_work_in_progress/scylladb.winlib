@@ -550,8 +550,10 @@ export TYPE=library
 #export VERSIONDATE=20260815
 #export VERSION=2026.2.5
 #export VERSIONDATE=20260822
-export VERSION=2026.2.6
-export VERSIONDATE=20260902
+#export VERSION=2026.2.6
+#export VERSIONDATE=20260902
+export VERSION=2026.3.0
+export VERSIONDATE=20260904
 wl-showstatus --package-version
 export DEPENDENCIES=pthreads,boost,seastar
 export OPTIONALDEPENDENCIES=

@@ -186,6 +186,8 @@ export VERSION=4.3.0.2
 export VERSIONDATE=20250521
 #export VERSION=4.3.1
 #export VERSIONDATE=20250701
+#export VERSION=4.4.0
+#export VERSIONDATE=20260904
 wl-showstatus --package-version
 export DEPENDENCIES=libjpeg,portablexdr,zlib,libsz
 export OPTIONALDEPENDENCIES=
