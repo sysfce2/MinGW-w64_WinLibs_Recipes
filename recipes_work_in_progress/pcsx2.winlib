@@ -207,7 +207,7 @@ export VERSIONDATE=20260903
 wl-showstatus --package-version
 export DEPENDENCIES=wxwidgets,gettext,xz,sdl2,portaudio,soundtouch,plutovg,plutosvg
 export OPTIONALDEPENDENCIES=pngpp
-export BUILDDEPENDENCIES=cmake
+export BUILDDEPENDENCIES=cmake,ninja
 export OPTIONALBUILDDEPENDENCIES=
 export LICENSEFILE=COPYING.GPLv2
 #export LICENSEFILE=COPYING.GPLv3
@@ -272,6 +272,14 @@ patch -ulbf cmake/SearchForStuff.cmake << EOF
 +if (MSVC)
         find_package(DirectX-Headers 1.618.1 REQUIRED)
 EOF
+# fix 3rdparty/D3D12MemAlloc/CMakeLists.txt (version >= 2.9.19)
+patch -ulbf 3rdparty/D3D12MemAlloc/CMakeLists.txt << EOF
+@@ -5,3 +5,3 @@
+
+-target_link_libraries(D3D12MemAlloc PRIVATE Microsoft::DirectX-Headers)
++#target_link_libraries(D3D12MemAlloc PRIVATE Microsoft::DirectX-Headers)
+
+EOF
 #mkdir -p build_test && cd build_test && cmake.exe -G"MSYS Makefiles" .. -LH && echo OK; cd ..; rm -rf build_test
 #rm -rf CMakeCache.txt CMakeFiles; cmake.exe -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release . -LH && echo OK
 #export BUILDDEPENDENCIES=cmake
@@ -280,11 +288,12 @@ EOF
 mkdir -p build_win &&
  wl-showstatus configure &&
  #PKG_CONFIG= cmake.exe -Wno-dev -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-compiler.cmake -DCMAKE_BUILD_STRIP:BOOL=ON -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH="$(pwd)/wx-config.sh" -DwxWidgets_wxrc_EXECUTABLE:FILEPATH=$MINGWPREFIX/wx/bin/gcc_msw/wxrc.exe -DwxWidgets_USE_DEBUG:BOOL=OFF -DwxWidgets_USE_STATIC:BOOL=OFF -DwxWidgets_USE_UNICODE:BOOL=ON -DwxWidgets_USE_UNIVERSAL:BOOL=OFF -S. -Bbuild_win &&
- PKG_CONFIG= WXWIN=$MINGWPREFIX/wx WXCFG=gcc_dll/mswu cmake.exe -Wno-dev -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DUSE_SYSTEM_LIBS:BOOL=ON -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-compiler.cmake -DCMAKE_BUILD_STRIP:BOOL=ON -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH="$(which wx-config.exe)" -DwxWidgets_wxrc_EXECUTABLE:FILEPATH=$MINGWPREFIX/wx/bin/gcc_msw/wxrc.exe -DwxWidgets_USE_DEBUG:BOOL=OFF -DwxWidgets_USE_STATIC:BOOL=OFF -DwxWidgets_USE_UNICODE:BOOL=ON -DwxWidgets_USE_UNIVERSAL:BOOL=OFF -DCMAKE_CXX_FLAGS:STRING="-fpermissive" -S. -Bbuild_win &&
+ #PKG_CONFIG= WXWIN=$MINGWPREFIX/wx WXCFG=gcc_dll/mswu cmake.exe -Wno-dev -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DUSE_SYSTEM_LIBS:BOOL=ON -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-compiler.cmake -DCMAKE_BUILD_STRIP:BOOL=ON -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH="$(which wx-config.exe)" -DwxWidgets_wxrc_EXECUTABLE:FILEPATH=$MINGWPREFIX/wx/bin/gcc_msw/wxrc.exe -DwxWidgets_USE_DEBUG:BOOL=OFF -DwxWidgets_USE_STATIC:BOOL=OFF -DwxWidgets_USE_UNICODE:BOOL=ON -DwxWidgets_USE_UNIVERSAL:BOOL=OFF -DCMAKE_CXX_FLAGS:STRING="-fpermissive" -S. -Bbuild_win &&
+ WXWIN=$MINGWPREFIX/wx WXCFG=gcc_dll/mswu cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DUSE_SYSTEM_LIBS:BOOL=ON -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-compiler.cmake -DCMAKE_BUILD_STRIP:BOOL=ON -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH="$(which wx-config.exe)" -DwxWidgets_wxrc_EXECUTABLE:FILEPATH=$MINGWPREFIX/wx/bin/gcc_msw/wxrc.exe -DwxWidgets_USE_DEBUG:BOOL=OFF -DwxWidgets_USE_STATIC:BOOL=OFF -DwxWidgets_USE_UNICODE:BOOL=ON -DwxWidgets_USE_UNIVERSAL:BOOL=OFF -DQt6Quick_DIR:PATH=$MINGWPREFIX/qt6/lib/cmake/Qt6Quick -DQt6QuickControls2_DIR:PATH=$MINGWPREFIX/qt6/lib/cmake/Qt6QuickControls2 -DFFMPEG_ROOT:PATH=$MINGWPREFIX/ffmpeg9 -DCMAKE_CXX_FLAGS:STRING="-fpermissive" -S. -Bbuild_win &&
  #wl-showstatus build &&
  #make -Cbuild_win &&
  wl-showstatus build-install &&
- make -Cbuild_win install/strip &&
+ ninja -Cbuild_win install/strip &&
     echo OK
 
 #export DEPENDENCIES=rapidyaml,wil
