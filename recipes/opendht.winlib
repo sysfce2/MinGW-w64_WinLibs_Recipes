@@ -357,6 +357,17 @@ export TYPE=library
 #export VERSIONDATE=20251201
 export VERSION=3.7.1
 export VERSIONDATE=20260225
+#export VERSION=4.0.0
+#export VERSIONDATE=20260905
+#export VERSION=4.1.0
+#export VERSIONDATE=20260905
+#export VERSION=4.2.0
+#export VERSIONDATE=20260905
+#export VERSION=4.3.0
+#export VERSIONDATE=20260905
+#export VERSION=4.4.0
+#export VERSIONDATE=20260905
+####src/dht_proxy_server.cpp:1616:31: error: no matching function for call to 'dht::DhtRunner::putEncrypted(dht::InfoHash&, dht::InfoHash&, std::shared_ptr<dht::Value>&, dht::DhtProxyServer::putEncrypted(restinio::request_handle_t, restinio::router::route_params_t)::<lambda(bool)>)'
 wl-showstatus --package-version
 export DEPENDENCIES=libnettle,gnutls,msgpack-cxx,libargon2,readline,fmt,http-parser,llhttp,cppunit,jsoncpp,restinio,asio
 #export DEPENDENCIES=libnettle,gnutls,msgpack-cxx,libargon2,readline,fmt,http-parser,llhttp,cppunit,jsoncpp,restinio,asio,restbed
@@ -464,6 +475,7 @@ mkdir -p build_static build_shared &&
  mkdir -p $INSTALLPREFIX/bin &&
  mv -f $INSTALLPREFIX/lib/*.dll $INSTALLPREFIX/bin/ &&
  wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf $BASENAME-$VERSION
+####$MINGWPREFIX/bin/rclone --help
 
 
 

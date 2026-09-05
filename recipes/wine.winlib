@@ -399,6 +399,8 @@ export VERSIONDATE=20221101
 #export VERSIONDATE=20260808
 #export VERSION=11.16
 #export VERSIONDATE=20260822
+#export VERSION=11.17
+#export VERSIONDATE=20260905
 ####winebuild : No such file or directory
 wl-showstatus --package-version
 export DEPENDENCIES=

@@ -5,8 +5,10 @@ export BASENAME=dht
 export DESCRIPTION="BitTorrent DHT library"
 export CATEGORY=communication
 export TYPE=library
-export VERSION=0.27
-export VERSIONDATE=20230305
+#export VERSION=0.27
+#export VERSIONDATE=20230305
+export VERSION=0.28
+export VERSIONDATE=20260905
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=

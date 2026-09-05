@@ -33,8 +33,10 @@ export TYPE=application
 #export VERSIONDATE=20231030
 #export VERSION=1.0.30
 #export VERSIONDATE=20240810
-export VERSION=1.0.31
-export VERSIONDATE=20250811
+#export VERSION=1.0.31
+#export VERSIONDATE=20250811
+export VERSION=1.0.32
+export VERSIONDATE=20260905
 wl-showstatus --package-version
 export DEPENDENCIES=gettext,libiconv,dbus,pango,libxext,libxft,libxi,libxinerama,libxrandr,libxrender,libxcomposite,libxxf86vm,libgnome,imlib2
 export OPTIONALDEPENDENCIES=
