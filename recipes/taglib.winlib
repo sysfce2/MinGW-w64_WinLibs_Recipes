@@ -56,8 +56,10 @@ export TYPE=library
 #export VERSIONDATE=20260307
 #export VERSION=2.3
 #export VERSIONDATE=20260511
-export VERSION=2.3.1
-export VERSIONDATE=20260720
+#export VERSION=2.3.1
+#export VERSIONDATE=20260720
+export VERSION=2.3.2
+export VERSIONDATE=20260905
 wl-showstatus --package-version
 export DEPENDENCIES=zlib,utfcpp
 export OPTIONALDEPENDENCIES=

@@ -261,8 +261,10 @@ export TYPE=library
 #export VERSIONDATE=20260904
 #export VERSION=5.1.0
 #export VERSIONDATE=20260806
-export VERSION=5.1.1
-export VERSIONDATE=20260816
+#export VERSION=5.1.1
+#export VERSIONDATE=20260816
+export VERSION=5.1.2
+export VERSIONDATE=20260905
 ####lib/monkey/mk_core/mk_rconf.c:27:10: fatal error: glob.h: No such file or directory
 wl-showstatus --package-version
 export DEPENDENCIES=
