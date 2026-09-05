@@ -21,6 +21,8 @@ export VERSION=18
 export VERSIONDATE=20260201
 #export VERSION=19
 #export VERSIONDATE=20260905
+####D:\Temp\ccaoVDlk.s: Assembler messages:
+####D:\Temp\ccaoVDlk.s:3768: Error: file not found: nn-1a298aa575a0.nnue
 wl-showstatus --package-version
 export DEPENDENCIES=
 export OPTIONALDEPENDENCIES=
