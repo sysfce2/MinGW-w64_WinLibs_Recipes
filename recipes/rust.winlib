@@ -576,7 +576,7 @@ wl-showstatus build-install &&
  #--set llvm-config=$MINGWPREFIX/share/llvm/bin/llvm-config.exe 
  #--set rust.codegen-backends="[\"$(if ${CC:-gcc} --version|grep -q "^clang"; then echo "llvm"; else echo "gcc"; fi)\"]" 
  #--set cc="$(cygpath -m $(which ${CC:-gcc}))" --set cxx="$(cygpath -m $(which ${CXX:-g++}))" --set ranlib="$(cygpath -m $(which ${RANLIB:-ranlib}))" --set linker="$(cygpath -m $(which ${CC:-gcc}))" 
- wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf rustc-$VERSION
+ wl-makepackage -c -d && wl-install -d $BASENAME-$VERSION && cd .. && wl-showstatus cleanup && rm -rf rustc-$VERSION-src
 ####Note: don't run from RAM drive
 ####$MINGWPREFIX/share/rust/bin/cargo -Z help
 

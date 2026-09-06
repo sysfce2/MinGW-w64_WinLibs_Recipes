@@ -75,6 +75,8 @@ export VERSIONDATE=20241116
 #export VERSIONDATE=20260718
 #export VERSION=0.14.1
 #export VERSIONDATE=20260814
+#export VERSION=0.14.2
+#export VERSIONDATE=20260906
 ####src/os/FileDescriptor.cpp:4:10: fatal error: sys/poll.h: No such file or directory
 wl-showstatus --package-version
 export DEPENDENCIES=

@@ -204,8 +204,10 @@ export TYPE=library
 #export VERSIONDATE=20260831
 #export VERSION=2.8.2
 #export VERSIONDATE=20260905
-export VERSION=2.9.19
-export VERSIONDATE=20260903
+#export VERSION=2.9.19
+#export VERSIONDATE=20260903
+export VERSION=2.9.32
+export VERSIONDATE=20260906
 wl-showstatus --package-version
 export DEPENDENCIES=wxwidgets,gettext,xz,sdl2,portaudio,soundtouch,plutovg,plutosvg
 export OPTIONALDEPENDENCIES=pngpp
@@ -282,6 +284,19 @@ patch -ulbf 3rdparty/D3D12MemAlloc/CMakeLists.txt << EOF
 +#target_link_libraries(D3D12MemAlloc PRIVATE Microsoft::DirectX-Headers)
 
 EOF
+# fix 3rdparty/libzip/lib/compat.h
+sed -i.bak -e "1i #define HAVE_FTELLO\n#define HAVE__SNWPRINTF_S" 3rdparty/libzip/lib/compat.h
+# fix missing std::strlen() in common/Assertions.cpp (version >= 2.9.32)
+sed -i.bak -e "1i #include <cstring>" common/Assertions.cpp
+# fix 3rdparty/d3d12memalloc/CMakeLists.txt (version >= 2.9.32)
+patch -ulbf 3rdparty/d3d12memalloc/CMakeLists.txt << EOF
+@@ -8,3 +8,5 @@
+ target_include_directories(D3D12MemAlloc PUBLIC "\${CMAKE_CURRENT_SOURCE_DIR}/include")
++if(MSVC)
+ target_compile_definitions(D3D12MemAlloc PRIVATE "D3D12MA_USING_DIRECTX_HEADERS")
++endif()
+ disable_compiler_warnings_for_target(D3D12MemAlloc)
+EOF
 #mkdir -p build_test && cd build_test && cmake.exe -G"MSYS Makefiles" .. -LH && echo OK; cd ..; rm -rf build_test
 #rm -rf CMakeCache.txt CMakeFiles; cmake.exe -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release . -LH && echo OK
 #export BUILDDEPENDENCIES=cmake
@@ -291,7 +306,8 @@ mkdir -p build_win &&
  wl-showstatus configure &&
  #PKG_CONFIG= cmake.exe -Wno-dev -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-compiler.cmake -DCMAKE_BUILD_STRIP:BOOL=ON -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH="$(pwd)/wx-config.sh" -DwxWidgets_wxrc_EXECUTABLE:FILEPATH=$MINGWPREFIX/wx/bin/gcc_msw/wxrc.exe -DwxWidgets_USE_DEBUG:BOOL=OFF -DwxWidgets_USE_STATIC:BOOL=OFF -DwxWidgets_USE_UNICODE:BOOL=ON -DwxWidgets_USE_UNIVERSAL:BOOL=OFF -S. -Bbuild_win &&
  #PKG_CONFIG= WXWIN=$MINGWPREFIX/wx WXCFG=gcc_dll/mswu cmake.exe -Wno-dev -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DUSE_SYSTEM_LIBS:BOOL=ON -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-compiler.cmake -DCMAKE_BUILD_STRIP:BOOL=ON -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH="$(which wx-config.exe)" -DwxWidgets_wxrc_EXECUTABLE:FILEPATH=$MINGWPREFIX/wx/bin/gcc_msw/wxrc.exe -DwxWidgets_USE_DEBUG:BOOL=OFF -DwxWidgets_USE_STATIC:BOOL=OFF -DwxWidgets_USE_UNICODE:BOOL=ON -DwxWidgets_USE_UNIVERSAL:BOOL=OFF -DCMAKE_CXX_FLAGS:STRING="-fpermissive" -S. -Bbuild_win &&
- WXWIN=$MINGWPREFIX/wx WXCFG=gcc_dll/mswu cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DUSE_SYSTEM_LIBS:BOOL=ON -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-compiler.cmake -DCMAKE_BUILD_STRIP:BOOL=ON -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH="$(which wx-config.exe)" -DwxWidgets_wxrc_EXECUTABLE:FILEPATH=$MINGWPREFIX/wx/bin/gcc_msw/wxrc.exe -DwxWidgets_USE_DEBUG:BOOL=OFF -DwxWidgets_USE_STATIC:BOOL=OFF -DwxWidgets_USE_UNICODE:BOOL=ON -DwxWidgets_USE_UNIVERSAL:BOOL=OFF -DQt6Quick_DIR:PATH=$MINGWPREFIX/qt6/lib/cmake/Qt6Quick -DQt6QuickControls2_DIR:PATH=$MINGWPREFIX/qt6/lib/cmake/Qt6QuickControls2 -DFFMPEG_ROOT:PATH=$MINGWPREFIX/ffmpeg9 -DCMAKE_CXX_FLAGS:STRING="-fpermissive" -S. -Bbuild_win &&
+ WXWIN=$MINGWPREFIX/wx WXCFG=gcc_dll/mswu cmake.exe -Wno-dev -GNinja -DCMAKE_INSTALL_PREFIX:PATH=$INSTALLPREFIX -DCMAKE_BUILD_TYPE:STRING=Release -DUSE_SYSTEM_LIBS:BOOL=ON -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-compiler.cmake -DCMAKE_BUILD_STRIP:BOOL=ON -DwxWidgets_CONFIG_EXECUTABLE:FILEPATH="$(which wx-config.exe)" -DwxWidgets_wxrc_EXECUTABLE:FILEPATH=$MINGWPREFIX/wx/bin/gcc_msw/wxrc.exe -DwxWidgets_USE_DEBUG:BOOL=OFF -DwxWidgets_USE_STATIC:BOOL=OFF -DwxWidgets_USE_UNICODE:BOOL=ON -DwxWidgets_USE_UNIVERSAL:BOOL=OFF -DQt6Quick_DIR:PATH=$MINGWPREFIX/qt6/lib/cmake/Qt6Quick -DQt6QuickControls2_DIR:PATH=$MINGWPREFIX/qt6/lib/cmake/Qt6QuickControls2 -DFFMPEG_ROOT:PATH=$MINGWPREFIX/ffmpeg9 -DCMAKE_ASM_MASM_COMPILER:FILEPATH="$(which jwasm.exe)" -DCMAKE_CXX_FLAGS:STRING="-fpermissive" -S. -Bbuild_win &&
+ #-DCMAKE_ASM_MASM_COMPILER_ARG1:STRING="-Zm" 
  #wl-showstatus build &&
  #make -Cbuild_win &&
  wl-showstatus build-install &&
